@@ -678,7 +678,7 @@ footer{
     We welcome dialogue with distributors, retail partners, and investors 
     who share our vision for conscious luxury across the Gulf and European markets.
   </p>
-  <a href="/cdn-cgi/l/email-protection#1179747d7d7e516279707a65783f737470646568" class="cemail r d3"><span class="__cf_email__" data-cfemail="9ff7faf3f3f0dfecf7fef4ebf6b1fdfafeeaebe6">[email&#160;protected]</span></a>
+  <a href="mailto:hello@shakti.beauty" class="cemail r d3">hello@shakti.beauty</a>
   <div class="ctags r">
     <span class="ctag">Distribution Partnerships</span>
     <span class="ctag">Wholesale Inquiries</span>
@@ -692,6 +692,20 @@ footer{
   <div class="fl"><img src="logo.png" alt="SHAKTI"></div>
   <div class="fc">Manufactured in India &nbsp;·&nbsp; Formulated in Italy &nbsp;·&nbsp; © SHAKTI Beauty</div>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const nav=document.getElementById("nav");
-window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",scr
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('v');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.r').forEach(el => io.observe(el));
+</script>
+</body>
+  </html>
