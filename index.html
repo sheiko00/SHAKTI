@@ -73,88 +73,129 @@ nav.scrolled .nav-logo img{height:28px;}
   font-family:var(--ff-body);
 }
 .nav-links a:hover{color:var(--gold);}
-.nav-cta{
-  font-size:9.5px;letter-spacing:4px;text-transform:uppercase;
-  font-family:var(--ff-body);
-  border-bottom:1px solid var(--gold);
-  color:var(--gold);text-decoration:none;
-  padding-bottom:2px;transition:opacity .3s;
+.nav-actions{display:flex;align-items:center;gap:20px;}
+.nav-icon{
+  color:var(--umber-mid);text-decoration:none;
+  display:flex;align-items:center;
+  transition:color .3s;
 }
-.nav-cta:hover{opacity:.65;}
+.nav-icon:hover{color:var(--gold);}
+nav.scrolled .nav-icon{color:var(--umber);}
 
 /* HERO */
 .hero{
   position:relative;
   height:100vh;min-height:680px;
-  display:flex;align-items:center;overflow:hidden;
+  display:grid;
+  grid-template-columns:48% 52%;
+  overflow:hidden;
 }
+
+/* Left panel: model photo */
 .hero-img{
-  position:absolute;inset:0;
-  background:url('hero.jpg') center 25%/cover no-repeat;
-  transform:scale(1.04);
+  position:relative;
+  background:url('hero.jpg') center 15%/cover no-repeat;
   animation:kenBurns 16s ease-out forwards;
 }
 .hero-img::after{
   content:'';
   position:absolute;inset:0;
-  background:
-    linear-gradient(to right,rgba(248,244,238,0) 42%,rgba(248,244,238,.9) 70%,rgba(248,244,238,1) 100%),
-    linear-gradient(to bottom,transparent 50%,rgba(248,244,238,.3) 100%);
+  background:linear-gradient(to right, transparent 70%, var(--ivory) 100%);
 }
 @keyframes kenBurns{
   from{transform:scale(1.04);}
   to{transform:scale(1);}
 }
+
+/* Right panel: marble ivory */
 .hero-content{
   position:relative;z-index:2;
-  margin-left:auto;width:48%;
-  padding:0 80px 0 40px;
+  background:var(--ivory);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 60px 40px 50px;
   animation:fadeUp 1.8s cubic-bezier(.22,1,.36,1) both;
 }
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(28px);}
   to{opacity:1;transform:translateY(0);}
 }
-.hero-logo-wrap{margin-bottom:20px;}
+.hero-logo-wrap{margin-bottom:16px;}
 .hero-logo-wrap img{
-  height:140px;display:block;
+  height:100px;display:block;
   mix-blend-mode:multiply;
-}
-.hero-pre{
-  font-size:9.5px;letter-spacing:6px;text-transform:uppercase;
-  font-family:var(--ff-body);
-  color:var(--gold);margin-bottom:22px;
-  display:flex;align-items:center;gap:14px;
-}
-.hero-pre::before{content:'';display:block;width:32px;height:1px;background:var(--gold);}
-.hero-title{
-  font-family:var(--ff-display);
-  font-size:clamp(44px,6vw,78px);font-weight:400;
-  line-height:1.05;letter-spacing:12px;
-  color:var(--umber);margin-bottom:10px;
 }
 .hero-sub{
   font-family:var(--ff-serif);
-  font-size:clamp(15px,1.8vw,21px);font-style:italic;font-weight:300;
-  color:var(--gold-rich);letter-spacing:2px;margin-bottom:32px;
+  font-size:clamp(14px,1.4vw,18px);font-style:italic;font-weight:300;
+  color:var(--gold-rich);letter-spacing:2px;margin-bottom:24px;
 }
-.hdiv{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
-.hdiv span{display:block;width:50px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
-.hdiv i{display:block;width:5px;height:5px;background:var(--gold);transform:rotate(45deg);}
+
+/* Bold headline like Gemini mockup */
+.hero-headline{
+  font-family:var(--ff-display);
+  font-size:clamp(28px,3.2vw,48px);
+  font-weight:600;
+  line-height:1.1;
+  letter-spacing:1px;
+  color:var(--umber);
+  margin-bottom:18px;
+  text-transform:uppercase;
+}
+.hl-accent{color:var(--gold);}
+
 .hero-body{
-  font-size:15px;line-height:1.95;
+  font-size:15px;line-height:1.8;
   font-family:var(--ff-body);
-  color:var(--umber-mid);max-width:360px;margin-bottom:44px;
+  color:var(--umber-mid);
+  margin-bottom:32px;
 }
-.hero-btns{display:flex;align-items:center;gap:28px;}
-.btn-primary{
-  display:inline-block;padding:14px 36px;
-  background:var(--umber);color:var(--gold-light);
+.hero-btns{display:flex;align-items:center;gap:24px;margin-bottom:40px;}
+
+/* Rounded CTA like Gemini */
+.btn-rounded{
+  display:inline-block;
+  padding:14px 32px;
+  border:2px solid var(--gold);
+  border-radius:40px;
+  background:linear-gradient(135deg, var(--umber) 0%, var(--umber-mid) 100%);
+  color:var(--gold-light);
   font-family:var(--ff-body);
-  font-size:9.5px;font-weight:400;letter-spacing:4px;text-transform:uppercase;
-  text-decoration:none;transition:background .35s,color .35s;
+  font-size:10px;font-weight:400;letter-spacing:3.5px;text-transform:uppercase;
+  text-decoration:none;
+  transition:all .35s ease;
+  box-shadow:0 4px 20px rgba(160,120,40,0.2);
 }
-.btn-primary:hover{background:var(--gold);color:var(--ivory);}
+.btn-rounded:hover{
+  background:var(--gold);
+  color:var(--ivory);
+  box-shadow:0 6px 28px rgba(160,120,40,0.35);
+  transform:translateY(-1px);
+}
+
+/* Product mini-row at hero bottom */
+.hero-products{
+  display:flex;gap:16px;
+  border-top:1px solid var(--rule);
+  padding-top:24px;
+}
+.hp-item{
+  flex:1;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  cursor:pointer;
+}
+.hp-item img{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:4px;
+  filter:saturate(.85);
+  transition:filter .4s,transform .4s;
+}
+.hp-item:hover img{filter:saturate(1.1);transform:scale(1.03);}
+.hp-item span{
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  font-family:var(--ff-body);color:var(--muted);
+}
 .btn-text{
   font-size:9.5px;letter-spacing:3.5px;text-transform:uppercase;
   font-family:var(--ff-body);
@@ -164,6 +205,7 @@ nav.scrolled .nav-logo img{height:28px;}
 .btn-text::after{content:'→';font-size:14px;transition:transform .3s;}
 .btn-text:hover{color:var(--gold);}
 .btn-text:hover::after{transform:translateX(5px);}
+
 
 /* BAND */
 .band{background:var(--umber);padding:15px 0;overflow:hidden;white-space:nowrap;}
@@ -358,19 +400,23 @@ footer{
 /* RESPONSIVE */
 @media(max-width:900px){
   nav,nav.scrolled{padding:18px 24px;}
-  .nav-links,.nav-cta{display:none;}
+  .nav-links{display:none;}
   .wrap{padding:0 24px;}
+  .hero{
+    grid-template-columns:1fr;
+    grid-template-rows:45vh 1fr;
+    height:auto;min-height:100vh;
+  }
   .hero-img::after{
-    background:linear-gradient(to bottom,transparent 35%,rgba(248,244,238,.97) 70%,rgba(248,244,238,1) 100%);
+    background:linear-gradient(to bottom,transparent 60%,var(--ivory) 100%);
   }
   .hero-content{
-    width:100%;margin:0;padding:0 24px;
-    position:absolute;bottom:64px;
-    display:flex;flex-direction:column;align-items:center;text-align:center;
+    padding:32px 24px 40px;
+    align-items:center;text-align:center;
   }
-  .hero-pre{justify-content:center;}
-  .hero-body{text-align:center;}
-  .hero-btns{flex-direction:column;gap:16px;}
+  .hero-headline{font-size:clamp(22px,6vw,34px);}
+  .hero-btns{flex-direction:column;gap:14px;align-items:center;}
+  .hero-products{gap:10px;}
   .intro{grid-template-columns:1fr;padding:80px 0;}
   .intro-right{display:none;}
   .products{grid-template-columns:1fr;}
@@ -389,29 +435,59 @@ footer{
   <a class="nav-logo" href="#"><img src="logo.png" alt="SHAKTI Beauty of Nature"></a>
   <ul class="nav-links">
     <li><a href="#collection">Collection</a></li>
-    <li><a href="#heritage">Heritage</a></li>
-    <li><a href="#values">Philosophy</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#collection">Rituals</a></li>
+    <li><a href="#heritage">About Us</a></li>
+    <li><a href="#contact">Shop</a></li>
   </ul>
-  <a class="nav-cta" href="#contact">Business Inquiries</a>
+  <div class="nav-actions">
+    <a href="#" class="nav-icon" aria-label="Search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+    </a>
+    <a href="#" class="nav-icon" aria-label="Cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    </a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
+  <!-- Left: model photo full bleed -->
   <div class="hero-img"></div>
+
+  <!-- Right: marble content panel -->
   <div class="hero-content">
     <div class="hero-logo-wrap">
       <img src="logo.png" alt="SHAKTI Beauty of Nature">
     </div>
     <div class="hero-sub">Indian Heritage, European Luxury</div>
-    <div class="hdiv"><span></span><i></i><span></span></div>
+
+    <h1 class="hero-headline">
+      <span class="hl-accent">Discover</span> the Essence<br>of Timeless Skincare.
+    </h1>
+
     <p class="hero-body">
-      A new standard of luxury skincare — rooted in 5,000 years of Ayurvedic 
-      wisdom, refined through European formulation mastery.
+      A unique fusion of ancient Indian rituals<br>and Italian elegance.
     </p>
+
     <div class="hero-btns">
-      <a href="#collection" class="btn-primary">Discover the Collection</a>
+      <a href="#collection" class="btn-rounded">Shop the Collection</a>
       <a href="#heritage" class="btn-text">Our Story</a>
+    </div>
+
+    <!-- Products preview row -->
+    <div class="hero-products">
+      <div class="hp-item">
+        <img src="serum.jpg" alt="Serum">
+        <span>Facial Serum</span>
+      </div>
+      <div class="hp-item">
+        <img src="mask.jpg" alt="Mask">
+        <span>Herbal Mask</span>
+      </div>
+      <div class="hp-item">
+        <img src="IMG-20260314-WA0030.jpg" alt="Cream">
+        <span>Ayurvedic Cream</span>
+      </div>
     </div>
   </div>
 </section>
@@ -602,7 +678,7 @@ footer{
     We welcome dialogue with distributors, retail partners, and investors 
     who share our vision for conscious luxury across the Gulf and European markets.
   </p>
-  <a href="mailto:hello@shakti.beauty" class="cemail r d3">hello@shakti.beauty</a>
+  <a href="/cdn-cgi/l/email-protection#1179747d7d7e516279707a65783f737470646568" class="cemail r d3"><span class="__cf_email__" data-cfemail="9ff7faf3f3f0dfecf7fef4ebf6b1fdfafeeaebe6">[email&#160;protected]</span></a>
   <div class="ctags r">
     <span class="ctag">Distribution Partnerships</span>
     <span class="ctag">Wholesale Inquiries</span>
@@ -616,11 +692,6 @@ footer{
   <div class="fl"><img src="logo.png" alt="SHAKTI"></div>
   <div class="fc">Manufactured in India &nbsp;·&nbsp; Formulated in Italy &nbsp;·&nbsp; © SHAKTI Beauty</div>
 </footer>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const nav=document.getElementById("nav");
-window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",scrollY>60));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("v");io.unobserve(e.target);}}),{threshold:.1});
-document.querySelectorAll(".r").forEach(el=>io.observe(el));
-</script>
-</body>
-  </html>
+window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",scr
