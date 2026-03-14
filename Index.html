@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SHAKTI Beauty</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Inter',sans-serif;
+color:#333;
+background:#ffffff;
+line-height:1.6;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+background-image:url("hero.jpg");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+position:relative;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(255,255,255,0.55);
+}
+
+.hero-content{
+position:relative;
+max-width:700px;
+animation:fadeUp 1.5s ease;
+}
+
+.logo{
+width:120px;
+margin-bottom:25px;
+}
+
+.brand{
+font-family:'Playfair Display',serif;
+font-size:52px;
+letter-spacing:6px;
+margin-bottom:10px;
+}
+
+.tagline{
+font-size:20px;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+.sub{
+font-size:16px;
+opacity:0.7;
+}
+
+/* SECTION */
+
+.section{
+padding:90px 20px;
+max-width:1100px;
+margin:auto;
+text-align:center;
+}
+
+.section h2{
+font-family:'Playfair Display',serif;
+font-size:34px;
+margin-bottom:20px;
+}
+
+.section p{
+max-width:720px;
+margin:auto;
+font-size:17px;
+opacity:0.8;
+}
+
+/* PRODUCTS */
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:40px;
+margin-top:50px;
+}
+
+.product img{
+width:100%;
+border-radius:8px;
+}
+
+.product h3{
+margin-top:15px;
+font-family:'Playfair Display',serif;
+font-size:22px;
+}
+
+/* CONTACT */
+
+.contact{
+background:#f6f6f6;
+padding:60px 20px;
+text-align:center;
+}
+
+.contact a{
+color:#000;
+text-decoration:none;
+font-size:18px;
+font-weight:500;
+}
+
+footer{
+text-align:center;
+font-size:14px;
+opacity:0.6;
+padding:25px;
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<img src="logo.png" class="logo">
+
+<div class="brand">SHAKTI</div>
+
+<div class="tagline">Indian Heritage • European Luxury</div>
+
+<div class="sub">
+Luxury Ayurvedic Skincare — Launching Soon
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>Preview Collection</h2>
+
+<p>
+Crafted from ancient Indian botanical traditions and refined with European formulation standards.  
+SHAKTI represents the harmony between nature, heritage, and modern luxury skincare.
+</p>
+
+<div class="products">
+
+<div class="product">
+<img src="serum.jpg">
+<h3>Ayurvedic Serum</h3>
+</div>
+
+<div class="product">
+<img src="mask.jpg">
+<h3>Ayurvedic Mask</h3>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>The Story</h2>
+
+<p>
+Shakti symbolizes the ancient energy of nature and feminine balance.  
+Our philosophy blends Ayurvedic heritage with modern European refinement to create a new standard of luxury skincare.
+</p>
+
+</section>
+
+
+<section class="contact">
+
+<h2>Business Inquiries</h2>
+
+<p>
+For partnerships and distribution opportunities please contact
+</p>
+
+<p style="margin-top:10px;">
+<a href="mailto:hello@shakti.beauty">hello@shakti.beauty</a>
+</p>
+
+</section>
+
+<footer>
+
+Manufacturing partnerships in India & Italy • © SHAKTI Beauty
+
+</footer>
+
+</body>
+  </html>
