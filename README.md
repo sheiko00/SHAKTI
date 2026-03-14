@@ -1,0 +1,2 @@
+# SHAKTI
+Ayurveda beauty
