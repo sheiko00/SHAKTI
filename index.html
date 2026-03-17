@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SHAKTI Beauty — Beauty of Nature</title> 
+<title>SHAKTI Beauty — Beauty of Nature</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -696,6 +696,202 @@ footer{
   <div class="fl"><img src="logo.png" alt="SHAKTI"></div>
   <div class="fc">Manufactured in India &nbsp;·&nbsp; Formulated in Italy &nbsp;·&nbsp; © SHAKTI Beauty</div>
 </footer>
+<!-- FLOATING SOCIAL BAR -->
+<div class="social-bar" id="socialBar">
+
+  <a class="sb-icon" href="https://www.instagram.com/shaktibeauty.co" target="_blank" rel="noopener" aria-label="Instagram" data-label="Instagram">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+    </svg>
+  </a>
+
+  <a class="sb-icon" href="https://www.facebook.com/Shaktibeauty.co" target="_blank" rel="noopener" aria-label="Facebook" data-label="Facebook">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+  <a class="sb-icon" href="https://x.com/SHAKTI_BEAUTY" target="_blank" rel="noopener" aria-label="X / Twitter" data-label="X">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  </a>
+
+  <a class="sb-icon" href="https://www.youtube.com/@SHAKTIBEAUTY" target="_blank" rel="noopener" aria-label="YouTube" data-label="YouTube">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" stroke="currentColor" stroke-width="1.5"/>
+      <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+</div>
+
+<style>
+/* ── FLOATING SOCIAL BAR ── */
+.social-bar {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* slide in on load */
+  animation: slideInBar 1s cubic-bezier(.22,1,.36,1) 1.5s both;
+}
+
+@keyframes slideInBar {
+  from { opacity: 0; transform: translateY(-50%) translateX(60px); }
+  to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+.sb-icon {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background: var(--umber);
+  border-left: 2px solid var(--gold);
+  color: rgba(223,194,120,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: width .35s cubic-bezier(.22,1,.36,1),
+              background .3s,
+              color .3s,
+              border-color .3s;
+  overflow: hidden;
+}
+
+.sb-icon svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+  position: relative;
+  z-index: 2;
+}
+
+/* Tooltip label */
+.sb-icon::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 52px;
+  background: var(--umber);
+  color: var(--gold-light);
+  font-family: var(--ff-body);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+  border-left: 1px solid var(--gold);
+}
+
+/* Gold shimmer sweep on hover */
+.sb-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(201,168,76,.12) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform .5s ease;
+}
+
+.sb-icon:hover {
+  background: var(--umber-mid);
+  color: var(--gold-light);
+  border-color: var(--gold-pale);
+  width: 50px;
+}
+
+.sb-icon:hover svg {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+.sb-icon:hover::before {
+  transform: translateX(100%);
+}
+
+.sb-icon:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* First and last get rounded corners on top/bottom */
+.sb-icon:first-child { border-radius: 4px 0 0 0; }
+.sb-icon:last-child  { border-radius: 0 0 0 4px; }
+
+/* Active press */
+.sb-icon:active {
+  transform: scale(0.93);
+  background: var(--gold);
+  color: var(--umber);
+}
+
+/* Pulse dot — shows it's live/active */
+.sb-icon:first-child::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2.5s ease infinite;
+  z-index: 3;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.6); }
+}
+
+/* Mobile: move to bottom horizontal bar */
+@media (max-width: 900px) {
+  .social-bar {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+    animation: slideUpBar 1s cubic-bezier(.22,1,.36,1) 1.5s both;
+  }
+
+  @keyframes slideUpBar {
+    from { opacity: 0; transform: translateY(60px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .sb-icon {
+    width: 25%;
+    height: 48px;
+    border-left: none;
+    border-top: 2px solid var(--gold);
+    border-radius: 0 !important;
+  }
+
+  .sb-icon:hover { width: 25%; }
+
+  .sb-icon::after { display: none; }
+
+  .sb-icon:first-child::before {
+    top: 5px; right: 5px;
+  }
+}
+</style>
+
 <script>
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
