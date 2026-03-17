@@ -682,7 +682,7 @@ footer{
     We welcome dialogue with distributors, retail partners, and investors 
     who share our vision for conscious luxury across the Gulf and European markets.
   </p>
-  <a href="mailto:hello@shakti.beauty" class="cemail r d3">hello@shakti.beauty</a>
+  <a href="/cdn-cgi/l/email-protection#7018151c1c1f300318111b04195e121511050409" class="cemail r d3"><span class="__cf_email__" data-cfemail="94fcf1f8f8fbd4e7fcf5ffe0fdbaf6f1f5e1e0ed">[email&#160;protected]</span></a>
   <div class="ctags r">
     <span class="ctag">Distribution Partnerships</span>
     <span class="ctag">Wholesale Inquiries</span>
@@ -728,8 +728,123 @@ footer{
 
 </div>
 
+<!-- FLOATING EMAIL BUTTON -->
+<a class="float-email" href="mailto:hello@shakti.beauty" aria-label="Email us">
+  <span class="fe-tooltip">hello@shakti.beauty</span>
+  <span class="fe-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+  </span>
+</a>
+
 <style>
-/* ── FLOATING SOCIAL BAR ── */
+/* ── FLOATING EMAIL BUTTON ── */
+.float-email {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  animation: slideInEmail 1s cubic-bezier(.22,1,.36,1) 2s both;
+}
+
+@keyframes slideInEmail {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* The circle icon */
+.fe-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--umber);
+  border: 1.5px solid var(--gold);
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: background .3s, transform .3s, box-shadow .3s;
+  box-shadow: 0 4px 20px rgba(30,22,9,0.35);
+}
+
+/* Breathing glow ring */
+.fe-icon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: 0;
+  animation: emailGlow 2.8s ease infinite;
+}
+
+@keyframes emailGlow {
+  0%   { opacity: 0;   transform: scale(1); }
+  50%  { opacity: 0.5; transform: scale(1.18); }
+  100% { opacity: 0;   transform: scale(1.35); }
+}
+
+/* Tooltip — email address */
+.fe-tooltip {
+  position: absolute;
+  left: 58px;
+  background: var(--umber);
+  color: var(--gold-light);
+  font-family: var(--ff-body);
+  font-size: 10px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  padding: 8px 16px;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .35s ease, transform .35s ease;
+  pointer-events: none;
+  /* small triangle pointing left */
+}
+.fe-tooltip::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px 5px 5px 0;
+  border-style: solid;
+  border-color: transparent var(--gold) transparent transparent;
+}
+
+.float-email:hover .fe-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.float-email:hover .fe-icon {
+  background: var(--gold);
+  color: var(--umber);
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(160,120,40,0.4);
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .float-email {
+    bottom: 64px;
+    left: 20px;
+  }
+  .fe-tooltip { display: none; }
+}
+</style>
+<style>
 .social-bar {
   position: fixed;
   right: 0;
@@ -891,7 +1006,6 @@ footer{
   }
 }
 </style>
-
 <script>
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
