@@ -4,119 +4,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SHAKTI — Ritual of Radiance</title>
+<title>SHAKTI — Ritual</title>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="video" href="video.mp4">
-<link rel="preload" as="image" href="shakti_logo_clean_glow.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&family=Cairo&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Inter',sans-serif;
   background:#000;
   color:#fff;
+  font-family:Inter;
   overflow-x:hidden;
 }
-body[dir="rtl"]{font-family:'Cairo',sans-serif}
+body[dir="rtl"]{font-family:Cairo}
 
-/* ===== Z-INDEX SYSTEM (FIX) ===== */
-:root{
-  --z-video:-2;
-  --z-overlay:-1;
-  --z-content:1;
-  --z-logo:1000;
-  --z-ui:2000;
-}
+/* ===== LAYERS ===== */
+video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
+.overlay{position:fixed;width:100%;height:100%;background:#0008;z-index:-1}
 
-/* INTRO */
-.touch-intro{
+/* ===== INTRO ===== */
+.intro{
   position:fixed;
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
   background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   z-index:9999;
-  font-family:'Playfair Display',serif;
-  letter-spacing:4px;
   cursor:pointer;
-  transition:1s;
 }
-.touch-intro.hide{opacity:0;pointer-events:none}
+.intro.hide{opacity:0;pointer-events:none}
 
-/* VIDEO */
-video{
-  position:fixed;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:var(--z-video);
-}
-
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.5), #000);
-  z-index:var(--z-overlay);
-}
-
-/* LOGO */
-.logo-wrap{
-  position:relative;
-  margin-bottom:20px;
-  transition:0.6s ease;
-  z-index:var(--z-logo);
-}
-
+/* ===== LOGO ===== */
+.logo-wrap{margin-bottom:20px;transition:.5s}
 .logo-wrap.small{
   position:fixed;
-  top:15px;
+  top:12px;
   left:50%;
-  transform:translateX(-50%) scale(0.5);
-  opacity:0.75;
-  z-index:var(--z-logo);
+  transform:translateX(-50%) scale(.5);
+  opacity:.7;
+  z-index:1000;
 }
 
 .logo{
-  width:220px;
+  width:200px;
   opacity:0;
-  transform:scale(0.7);
-  filter:blur(8px);
-  animation:logoReveal 2s ease forwards paused, pulse 6s infinite 2s;
+  animation:logoReveal 1.8s forwards paused;
 }
 
 @keyframes logoReveal{
-  0%{opacity:0;transform:scale(0.7);filter:blur(8px)}
-  100%{opacity:1;transform:scale(1);filter:blur(0)}
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.03)}
+  from{opacity:0;transform:scale(.6)}
+  to{opacity:1;transform:scale(1)}
 }
 
-/* TEXT */
-h1{
-  font-family:'Playfair Display';
-  font-size:48px;
-  letter-spacing:6px;
-}
+/* ===== TEXT ===== */
+h1{font-family:Playfair;font-size:44px;letter-spacing:5px}
+.tag{opacity:.7;margin-top:10px}
 
-.tagline{opacity:0.8}
-
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
-  position:relative;
-  z-index:var(--z-content);
   height:100vh;
   display:flex;
   align-items:center;
@@ -124,153 +72,198 @@ section{
   text-align:center;
 }
 
-/* EMAIL */
-.email-box{
-  background:rgba(255,255,255,0.05);
-  padding:30px;
+/* ===== EMAIL ===== */
+.box{
+  background:#fff1;
+  padding:25px;
   border-radius:20px;
-  backdrop-filter:blur(10px);
-  max-width:350px;
+  backdrop-filter:blur(8px);
 }
 
-/* INPUT */
 input{
   width:100%;
-  padding:14px;
-  border-radius:30px;
+  padding:12px;
+  border-radius:20px;
   border:none;
-  margin-top:20px;
+  margin-top:15px;
 }
 
-/* BUTTON */
 button{
   width:100%;
-  padding:14px;
-  border-radius:30px;
+  padding:12px;
+  border-radius:20px;
   border:none;
   background:#d4af37;
   color:#000;
   margin-top:10px;
 }
 
-/* SOCIAL (FIX) */
-.social-bar{
+/* ===== SOCIAL ===== */
+.social{
   position:fixed;
-  top:50%;
   left:15px;
+  top:50%;
   transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  z-index:var(--z-ui);
+  z-index:2000;
 }
-
-.social-bar a{
-  width:48px;height:48px;border-radius:50%;
+.social a{
+  display:block;
+  margin:12px 0;
+  width:45px;height:45px;
+  border-radius:50%;
+  background:#fff1;
   display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,0.08);
 }
+.social svg{fill:#d4af37;width:22px}
 
-.social-bar svg{
-  width:22px;height:22px;
-  fill:#d4af37;
-}
-
-/* CONTROLS */
-.controls{
+/* ===== CONTROLS ===== */
+.ctrl{
   position:fixed;
-  top:20px;
-  right:20px;
-  display:flex;
-  gap:10px;
-  z-index:var(--z-ui);
+  top:15px;
+  right:15px;
+  z-index:2000;
 }
-
-.control-btn{
-  width:40px;height:40px;border-radius:50%;
-  background:rgba(212,175,55,0.2)!important;
-  color:#d4af37!important;
+.ctrl button{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:#d4af37;
+  color:#000;
   border:none;
+  margin-left:5px;
+  cursor:pointer;
 }
 
-/* MAIL */
-.mail-fab{
+/* ===== EMAIL FLOAT ===== */
+.mail{
   position:fixed;
   bottom:20px;
   right:20px;
   background:#d4af37;
+  padding:10px 16px;
+  border-radius:25px;
   color:#000;
-  padding:12px 18px;
-  border-radius:30px;
   text-decoration:none;
-  z-index:var(--z-ui);
 }
+
+/* ===== LIGHT ===== */
+.light{
+  position:fixed;
+  width:180px;height:180px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,55,.2),transparent);
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  opacity:0;
+  z-index:1500;
+}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(30px);transition:1s}
+.reveal.show{opacity:1;transform:translateY(0)}
 </style>
 
 </head>
 
 <body>
 
-<div class="touch-intro" id="intro">Tap to Begin</div>
+<div class="intro" id="intro">Tap to Begin</div>
 
-<div class="controls">
-  <button class="control-btn" id="soundToggle">🔊</button>
-  <button class="control-btn" id="langBtn">EN</button>
+<div class="ctrl">
+<button id="mute">🔊</button>
+<button id="lang">EN</button>
 </div>
 
 <audio id="ambient" src="ambient.mp3" loop></audio> <audio id="whisper" src="whisper.mp3"></audio>
 
-<video autoplay muted loop playsinline>
-  <source src="video.mp4">
-</video>
+<video autoplay muted loop><source src="video.mp4"></video>
 
 <div class="overlay"></div>
 
 <section>
-  <div>
-    <div class="logo-wrap" id="logoWrap">
-      <img src="shakti_logo_clean_glow.png" class="logo">
-    </div>
-    <h1>SHAKTI</h1>
-    <p id="taglineText" class="tagline">COMING SOON — THE RITUAL BEGINS</p>
-  </div>
+<div class="reveal">
+<div class="logo-wrap" id="logoWrap">
+<img src="logo.png" class="logo">
+</div>
+<h1>SHAKTI</h1>
+<p class="tag" id="tag">COMING SOON — THE RITUAL BEGINS</p>
+</div>
 </section>
 
 <section>
-  <div class="email-box">
-    <h2 id="joinText">Join the Ritual</h2>
-    <input id="emailInput" type="email" placeholder="Enter your email">
-    <button id="btnText">Request Access</button>
-  </div>
+<div class="box reveal">
+<h2 id="join">Join the Ritual</h2>
+<input id="mailInput" placeholder="Enter your email">
+<button id="btn">Request Access</button>
+</div>
 </section>
 
-<!-- SOCIAL FIXED -->
+<!-- SOCIAL -->
 
-<div class="social-bar">
-<a href="https://www.youtube.com/@SHAKTIBEAUTY"><svg viewBox="0 0 24 24"><path d="M23.498 6.186..."/></svg></a>
-<a href="https://www.facebook.com/Shaktibeauty.co"><svg viewBox="0 0 24 24"><path d="M22 12a10..."/></svg></a>
+<div class="social">
+<a href="#"><svg viewBox="0 0 24 24"><path d="M23.498 6.186L..."/></svg></a>
+<a href="#"><svg viewBox="0 0 24 24"><path d="M22 12a10..."/></svg></a>
 </div>
 
-<a href="mailto:hello@shakti.beauty" class="mail-fab">Email</a>
+<a href="mailto:hello@shakti.beauty" class="mail">Email</a>
 
 <script>
 
+// LIGHT
+const light=document.createElement('div')
+light.className='light'
+document.body.appendChild(light)
+
+document.onmousemove=e=>{
+  light.style.opacity=1
+  light.style.left=e.clientX+'px'
+  light.style.top=e.clientY+'px'
+}
+
 // INTRO
 intro.onclick=()=>{
-  intro.classList.add('hide');
-  ambient.play();
-  setTimeout(()=>whisper.play(),800);
-  setTimeout(()=>document.querySelector('.logo').style.animationPlayState='running',600);
-};
+  intro.classList.add('hide')
 
-// FLOAT FIX
-window.addEventListener('scroll',()=>{
-  if(window.scrollY>100){
-    logoWrap.classList.add('small');
-  }else{
-    logoWrap.classList.remove('small');
-  }
-});
+  ambient.volume=.3
+  ambient.play()
+
+  setTimeout(()=>whisper.play(),700)
+
+  setTimeout(()=>{
+    document.querySelector('.logo').style.animationPlayState='running'
+  },500)
+}
+
+// FLOAT LOGO
+window.onscroll=()=>{
+  if(scrollY>100) logoWrap.classList.add('small')
+  else logoWrap.classList.remove('small')
+}
+
+// REVEAL
+const obs=new IntersectionObserver(e=>{
+  e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('show')})
+})
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))
+
+// MUTE
+let m=false
+mute.onclick=()=>{
+  m=!m
+  ambient.muted=m
+  whisper.muted=m
+  mute.innerText=m?'🔇':'🔊'
+}
+
+// LANG
+let l='en'
+lang.onclick=()=>{
+  l=l==='en'?'ar':'en'
+  tag.innerText=l==='en'?'COMING SOON — THE RITUAL BEGINS':'قريباً — الطقس يبدأ'
+  join.innerText=l==='en'?'Join the Ritual':'انضم الآن'
+  btn.innerText=l==='en'?'Request Access':'اطلب الوصول'
+  mailInput.placeholder=l==='en'?'Enter your email':'أدخل بريدك'
+  document.body.dir=l==='ar'?'rtl':'ltr'
+}
 
 </script>
 
