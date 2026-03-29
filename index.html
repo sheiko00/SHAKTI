@@ -1,363 +1,142 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHAKTI — Ritual of Radiance</title>
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+
+<!-- FAVICON -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- FONTS -->
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;color:#fff;background:#000;overflow:hidden}
 
-body{
-  font-family:'Inter',sans-serif;
-  color:#fff;
-  background:#000;
-  overflow-x:hidden;
+/* VIDEO */
+video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.overlay{position:fixed;width:100%;height:100%;background:linear-gradient(to bottom, rgba(0,0,0,0.3), #000);z-index:-1}
+
+/* INTRO */
+.intro{position:fixed;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
+.intro img{width:260px;animation:introAnim 3s ease forwards}
+@keyframes introAnim{
+0%{opacity:0;transform:scale(0.8);filter:blur(10px)}
+50%{opacity:1;transform:scale(1.05);filter:blur(0)}
+100%{opacity:1;transform:scale(1)}
 }
 
-section{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-}
+/* TEXT */
+section{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.logo{width:240px;margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(212,175,55,0.4))}
+h1{font-family:'Playfair Display',serif;font-size:64px;letter-spacing:6px;margin-bottom:20px}
+.tagline{opacity:0.8;margin-bottom:30px;letter-spacing:2px}
 
-video{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  z-index:-2;
-}
+/* FORM */
+input{width:100%;padding:14px;border-radius:30px;border:none;margin-bottom:15px}
+button{width:100%;padding:14px;border-radius:30px;border:none;background:#d4af37;color:#000;font-weight:bold}
 
-.overlay{
-  position:fixed;
-  width:100%;height:100%;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.3), #000);
-  z-index:-1;
-}
+/* SOCIAL */
+.social-bar{position:fixed;top:50%;left:20px;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px}
+.social-bar a{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.08);color:#fff;transition:.3s}
+.social-bar a:hover{background:#d4af37;transform:scale(1.1)}
 
-.logo{
-  width:240px;
-  margin-bottom:20px;
-  filter: drop-shadow(0 0 20px rgba(212,175,55,0.35));
-}
+/* BUTTON */
+.mail-fab{position:fixed;bottom:30px;right:30px;padding:14px 22px;border-radius:40px;background:#d4af37;color:#000;font-weight:600;text-decoration:none}
 
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:64px;
-  letter-spacing:6px;
-  margin-bottom:20px;
-}
-
-.tagline{
-  opacity:0.85;
-  margin-bottom:30px;
-  letter-spacing:2px;
-}
-
-.btn{
-  padding:14px 40px;
-  border:1px solid rgba(255,255,255,0.3);
-  border-radius:40px;
-  text-decoration:none;
-  color:#fff;
-  transition:0.3s;
-}
-
-.btn:hover{
-  background:#d4af37;
-  border-color:#d4af37;
-  transform:translateY(-4px) scale(1.05);
-  box-shadow:0 10px 30px rgba(212,175,55,0.5);
-}
-
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1.2s ease;
-}
-
-.fade.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.intro{
-  position:fixed;
-  width:100%;height:100%;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-
-.intro img{
-  width:260px;
-  animation:logoIntro 3s ease forwards;
-}
-
-@keyframes logoIntro{
-  0%{opacity:0; transform:scale(0.8); filter:blur(10px)}
-  50%{opacity:1; transform:scale(1.05); filter:blur(0)}
-  100%{opacity:1; transform:scale(1)}
-}
-
-
-
-/* FLOATING SOCIAL BAR */
-.social-bar{
-  position:fixed;
-  top:50%;
-  left:20px;
-  transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  z-index:999;
-}
-
-.social-bar a{
-  width:42px;
-  height:42px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(10px);
-  color:#fff;
-  text-decoration:none;
-  font-size:12px;
-  transition:0.3s;
-}
-
-.social-bar a svg{
-  transition:0.3s;
-}
-
-.social-bar a:hover{
-  background:#d4af37;
-  transform:scale(1.12);
-  box-shadow:0 0 20px rgba(212,175,55,0.6);
-}
-
-.social-bar a:hover svg{
-  color:#000;
-}
-
-/* FLOATING EMAIL BUTTON */
-.mail-fab{
-  position:fixed;
-  bottom:30px;
-  right:30px;
-  padding:14px 22px;
-  border-radius:40px;
-  background:#d4af37;
-  color:#000;
-  font-weight:600;
-  text-decoration:none;
-  box-shadow:0 10px 30px rgba(212,175,55,0.4);
-  transition:0.3s;
-  z-index:999;
-}
-
-.mail-fab:hover{
-  transform:translateY(-4px);
-  box-shadow:0 15px 40px rgba(212,175,55,0.6);
-}
-
-
-
-/* PARTICLES BACKGROUND */
-.particles span{
-  position:fixed;
-  width:4px;
-  height:4px;
-  background:rgba(212,175,55,0.3);
-  border-radius:50%;
-  animation:float 12s linear infinite;
-}
-
-@keyframes float{
-  from{transform:translateY(100vh) scale(0)}
-  to{transform:translateY(-10vh) scale(1)}
-}
-
-
-
-/* CURSOR GLOW */
-.cursor-glow{
-  position:fixed;
-  width:120px;
-  height:120px;
-  background:radial-gradient(circle, rgba(212,175,55,0.25), transparent 70%);
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  z-index:9999;
-}
-
-/* PARALLAX EFFECT */
-.parallax{
-  transform:translateZ(0);
-  transition:transform 0.2s ease;
-}
-
+/* CURSOR */
+.cursor{position:fixed;width:120px;height:120px;background:radial-gradient(circle, rgba(212,175,55,0.25), transparent);pointer-events:none;transform:translate(-50%,-50%)}
 </style>
-
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
 
 </head>
 
 <body>
 
-<!-- CURSOR GLOW -->
-<div class="cursor-glow" id="cursorGlow"></div>
+<!-- CURSOR -->
+
+<div class="cursor" id="cursor"></div>
 
 <!-- AUDIO -->
-<audio id="bgSound" src="ambient.mp3" loop></audio>
-<audio id="whisper" src="whisper.mp3"></audio>
 
-<!-- INTRO LOGO -->
+<audio id="ambient" src="ambient.mp3" loop></audio> <audio id="whisper" src="whisper.mp3"></audio>
+
+<!-- INTRO -->
+
 <div class="intro">
-  <img src="/mnt/data/shakti_logo_clean_glow.png">
+  <img src="shakti_logo_clean_glow.png">
 </div>
 
-<!-- VIDEO BACKGROUND -->
+<!-- VIDEO -->
+
 <video autoplay muted loop playsinline>
-  <source src="/mnt/data/Untitled design (5).mp4" type="video/mp4">
+  <source src="video.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
-<!-- PARTICLES -->
-<div class="particles">
-  <span style="left:10%;animation-duration:12s"></span>
-  <span style="left:30%;animation-duration:18s"></span>
-  <span style="left:50%;animation-duration:15s"></span>
-  <span style="left:70%;animation-duration:20s"></span>
-  <span style="left:90%;animation-duration:14s"></span>
-</div>
+<!-- MAIN -->
 
-<!-- HERO -->
 <section>
-  <div class="fade">
-    <img src="/mnt/data/shakti_logo_clean_glow.png" class="logo">
+  <div>
+    <img src="shakti_logo_clean_glow.png" class="logo">
     <h1>SHAKTI</h1>
     <p class="tagline">COMING SOON — THE RITUAL BEGINS</p>
   </div>
 </section>
 
-<!-- STORY -->
 <section>
-  <div class="fade">
-    <h1>ANCIENT POWER</h1>
-    <p class="tagline">Rooted in timeless rituals of nature</p>
-  </div>
-</section>
-
-<!-- PHILOSOPHY -->
-<section>
-  <div class="fade">
-    <h1>MODERN LUXURY</h1>
-    <p class="tagline">Refined by science. Designed for queens.</p>
-  </div>
-</section>
-
-<!-- EMAIL COLLECTION -->
-<section>
-  <div class="fade" style="max-width:400px;">
+  <div>
     <h1>Join the Ritual</h1>
     <p class="tagline">Be the first to access SHAKTI before the world.</p>
 
-    <form action="https://formspree.io/f/xykbeeye" method="POST">
-      <input type="email" name="email" placeholder="Enter your email" required style="width:100%;padding:14px;border-radius:30px;border:none;margin-bottom:15px;">
-      <button type="submit" style="width:100%;padding:14px;border-radius:30px;border:none;background:#d4af37;color:#000;font-weight:bold;cursor:pointer;">Request Access</button>
-    </form>
+```
+<form action="https://formspree.io/f/xykbeeye" method="POST">
+  <input type="email" name="email" placeholder="Enter your email" required>
+  <button type="submit">Request Access</button>
+</form>
+```
+
   </div>
 </section>
 
-<script>
+<!-- SOCIAL -->
 
-// intro hide
-setTimeout(()=>{
-  document.querySelector('.intro').style.display='none';
-},3200);
-
-// scroll animation
-const fades=document.querySelectorAll('.fade');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('show');
-    }
-  });
-});
-fades.forEach(el=>observer.observe(el));
-
-
-
-// CURSOR GLOW
-const glow = document.getElementById('cursorGlow');
-document.addEventListener('mousemove', e => {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top = e.clientY + 'px';
-});
-
-// SOUND ON FIRST CLICK (ambient)
-const audio = document.getElementById('bgSound');
-document.addEventListener('click', () => {
-  if(audio.paused){ audio.volume = 0.3; audio.play(); }
-});
-
-// AI WHISPER INTRO (plays once after intro)
-const whisper = document.getElementById('whisper');
-setTimeout(()=>{
-  whisper.volume = 0.4;
-  whisper.play().catch(()=>{});
-},1500);
-
-// PARALLAX
-window.addEventListener('scroll', () => {
-  document.querySelectorAll('section').forEach((el, i) => {
-    el.style.transform = `translateY(${window.scrollY * (0.02 * (i+1))}px)`;
-  });
-});
-
-</script>
-
-
-
-<!-- FLOATING SOCIAL LINKS -->
 <div class="social-bar">
-  <a href="https://www.youtube.com/@SHAKTIBEAUTY" target="_blank" aria-label="YouTube">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 0 0 .5 6.2 31.7 31.7 0 0 0 0 12a31.7 31.7 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 24 12a31.7 31.7 0 0 0-.5-5.8zM9.8 15.5v-7l6.2 3.5-6.2 3.5z"/></svg>
-  </a>
-  <a href="https://x.com/SHAKTI_BEAUTY" target="_blank" aria-label="X">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8-9.2L1 2h6.9l4.8 6.3L18.9 2zm-2.4 18h1.9L7.6 4H5.6l10.9 16z"/></svg>
-  </a>
-  <a href="https://www.instagram.com/shaktibeauty.co" target="_blank" aria-label="Instagram">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm6.5-1.8a1.2 1.2 0 1 0 1.2 1.2 1.2 1.2 0 0 0-1.2-1.2zM12 9.3A2.7 2.7 0 1 1 9.3 12 2.7 2.7 0 0 1 12 9.3z"/></svg>
-  </a>
-  <a href="https://www.facebook.com/Shaktibeauty.co" target="_blank" aria-label="Facebook">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
-  </a>
+  <a href="https://www.youtube.com/@SHAKTIBEAUTY">▶</a>
+  <a href="https://x.com/SHAKTI_BEAUTY">X</a>
+  <a href="https://www.instagram.com/shaktibeauty.co">IG</a>
+  <a href="https://www.facebook.com/Shaktibeauty.co">f</a>
 </div>
 
-<!-- FLOATING EMAIL BUTTON -->
 <a href="mailto:hello@shakti.beauty" class="mail-fab">Join the Ritual</a>
+
+<script>
+// intro hide
+setTimeout(()=>{document.querySelector('.intro').style.display='none'},3000);
+
+// cursor glow
+const c=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{
+c.style.left=e.clientX+'px';
+c.style.top=e.clientY+'px';
+});
+
+// sound
+const a=document.getElementById('ambient');
+document.addEventListener('click',()=>{if(a.paused){a.volume=0.3;a.play()}});
+
+// whisper
+const w=document.getElementById('whisper');
+setTimeout(()=>{w.volume=0.4;w.play().catch(()=>{})},1500);
+</script>
 
 </body>
 </html>
