@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SHAKTI — Ritual of Radiance</title>
 
 <link rel="preload" as="video" href="video.mp4">
@@ -21,7 +22,7 @@ body{
   overflow-x:hidden;
 }
 
-/* INTRO */
+/* ===== INTRO ===== */
 .touch-intro{
   position:fixed;
   width:100%;
@@ -38,7 +39,7 @@ body{
 }
 .touch-intro.hide{opacity:0;pointer-events:none}
 
-/* VIDEO */
+/* ===== VIDEO ===== */
 video{
   position:fixed;
   width:100%;
@@ -47,7 +48,7 @@ video{
   z-index:-2;
 }
 
-/* OVERLAY */
+/* ===== OVERLAY ===== */
 .overlay{
   position:fixed;
   width:100%;
@@ -56,33 +57,20 @@ video{
   z-index:-1;
 }
 
-/* FLOATING LOGO */
+/* ===== LOGO ===== */
 .logo-wrap{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  transition:all 0.6s ease;
-  z-index:100;
-}
-
-.logo-wrap.small{
-  top:20px;
-  left:50%;
-  transform:translateX(-50%) scale(0.5);
+  position:relative;
+  margin-bottom:20px;
 }
 
 .logo{
   width:220px;
-  opacity:0;
-  transform:scale(0.7);
-  filter:blur(10px);
   animation:logoReveal 2.5s ease forwards, pulse 6s ease-in-out infinite 2.5s;
+  filter:drop-shadow(0 0 12px rgba(212,175,55,0.4));
 }
 
 @keyframes logoReveal{
   0%{opacity:0;transform:scale(0.7);filter:blur(10px)}
-  50%{opacity:1;transform:scale(1.05);filter:blur(2px)}
   100%{opacity:1;transform:scale(1);filter:blur(0)}
 }
 
@@ -91,18 +79,7 @@ video{
   50%{transform:scale(1.03)}
 }
 
-/* REVEAL */
-.reveal{
-  opacity:0;
-  transform:translateY(50px);
-  transition:all 1.4s ease;
-}
-.reveal.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
   height:100vh;
   display:flex;
@@ -111,7 +88,15 @@ section{
   text-align:center;
 }
 
-/* EMAIL BOX */
+/* ===== TEXT FIX (logo فوق) ===== */
+.hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+
+/* ===== EMAIL BOX ===== */
 .email-box{
   background:rgba(255,255,255,0.05);
   padding:30px;
@@ -120,6 +105,7 @@ section{
   max-width:350px;
 }
 
+/* ===== INPUT ===== */
 input{
   width:100%;
   padding:14px;
@@ -128,6 +114,7 @@ input{
   margin-top:20px;
 }
 
+/* ===== BUTTON ===== */
 button{
   width:100%;
   padding:14px;
@@ -139,7 +126,7 @@ button{
   font-weight:bold;
 }
 
-/* SOCIAL */
+/* ===== SOCIAL (FIXED SVG) ===== */
 .social-bar{
   position:fixed;
   top:50%;
@@ -153,12 +140,11 @@ button{
 .social-bar a{
   width:48px;
   height:48px;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:50%;
   background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(6px);
   transition:0.3s;
 }
 
@@ -173,7 +159,7 @@ button{
   box-shadow:0 0 15px rgba(212,175,55,0.6);
 }
 
-/* SOUND */
+/* ===== SOUND (FIX GOLD) ===== */
 .sound-toggle{
   position:fixed;
   top:20px;
@@ -181,32 +167,33 @@ button{
   width:38px;
   height:38px;
   border-radius:50%;
-  background:rgba(212,175,55,0.15);
+  background:rgba(212,175,55,0.2);
+  color:#d4af37;
   display:flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
-  color:#d4af37;
 }
 
-/* LANGUAGE */
+/* ===== LANGUAGE (WORKING) ===== */
 .lang-switcher{
   position:fixed;
   top:20px;
   right:20px;
   color:#d4af37;
+  cursor:pointer;
+  font-size:14px;
 }
 
-/* BUTTON */
+/* ===== FLOAT BUTTON ===== */
 .mail-fab{
   position:fixed;
   bottom:20px;
   right:20px;
-  padding:12px 18px;
-  border-radius:40px;
   background:#d4af37;
   color:#000;
-  text-decoration:none;
+  padding:12px 18px;
+  border-radius:30px;
 }
 </style>
 
@@ -216,78 +203,105 @@ button{
 
 <div class="touch-intro" id="intro">Tap to Begin</div>
 
-<div class="lang-switcher">EN</div>
+<div class="lang-switcher" id="langBtn">EN</div>
 <div class="sound-toggle" id="soundToggle">🔊</div>
 
 <audio id="ambient" src="ambient.mp3" loop></audio> <audio id="whisper" src="whisper.mp3"></audio>
 
-<video autoplay muted loop playsinline preload="metadata">
+<video autoplay muted loop playsinline>
   <source src="video.mp4">
 </video>
 
 <div class="overlay"></div>
 
-<!-- FLOATING LOGO -->
-
-<div class="logo-wrap" id="logoWrap">
-  <img src="shakti_logo_clean_glow.png" class="logo">
-</div>
+<!-- HERO -->
 
 <section>
-  <div class="reveal">
+  <div class="hero">
+    <div class="logo-wrap">
+      <img src="shakti_logo_clean_glow.png" class="logo">
+    </div>
     <h1>SHAKTI</h1>
-    <p>COMING SOON — THE RITUAL BEGINS</p>
+    <p class="tagline">COMING SOON — THE RITUAL BEGINS</p>
   </div>
 </section>
 
+<!-- EMAIL -->
+
 <section>
-  <div class="email-box reveal">
-    <h2>Join the Ritual</h2>
-    <input type="email" placeholder="Enter your email">
-    <button>Request Access</button>
+  <div class="email-box">
+    <h2 id="joinText">Join the Ritual</h2>
+    <input id="emailInput" type="email" placeholder="Enter your email">
+    <button id="btnText">Request Access</button>
   </div>
 </section>
+
+<!-- SOCIAL (FULL ICONS) -->
 
 <div class="social-bar">
-<a href="#"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1..."/></svg></a>
-<a href="#"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.5 8.6..."/></svg></a>
-<a href="#"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1..."/></svg></a>
-<a href="#"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1..."/></svg></a>
+
+<a href="https://www.youtube.com/@SHAKTIBEAUTY">
+<svg viewBox="0 0 24 24">
+<path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 0 0 .5 6.2A31.7 31.7 0 0 0 0 12a31.7 31.7 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 24 12zM9.8 15.5l6.2-3.5-6.2-3.5z"/>
+</svg>
+</a>
+
+<a href="https://x.com/SHAKTI_BEAUTY">
+<svg viewBox="0 0 24 24">
+<path d="M18.9 2H22l-7.5 8.6L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8-9.2L1 2h6.9l4.8 6.3z"/>
+</svg>
+</a>
+
+<a href="https://www.instagram.com/shaktibeauty.co">
+<svg viewBox="0 0 24 24">
+<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7z"/>
+</svg>
+</a>
+
+<a href="https://www.facebook.com/Shaktibeauty.co">
+<svg viewBox="0 0 24 24">
+<path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5z"/>
+</svg>
+</a>
+
 </div>
 
 <script>
 
 // INTRO
-intro.onclick = intro.ontouchstart = ()=>{
+intro.onclick = ()=>{
   intro.classList.add('hide');
   ambient.play().catch(()=>{});
   whisper.play().catch(()=>{});
 };
 
-// REVEAL
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('show');
-  });
-},{threshold:0.2});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-// FLOATING LOGO
-window.addEventListener('scroll', ()=>{
-  if(window.scrollY > 100){
-    logoWrap.classList.add('small');
-  }else{
-    logoWrap.classList.remove('small');
-  }
-});
-
-// MUTE
+// SOUND FIX
 let muted=false;
 soundToggle.onclick=()=>{
   muted=!muted;
   ambient.muted=muted;
   whisper.muted=muted;
   soundToggle.innerText=muted?'🔇':'🔊';
+};
+
+// LANGUAGE FIX
+const langData={
+  en:{join:"Join the Ritual",btn:"Request Access",email:"Enter your email"},
+  ar:{join:"انضم الآن",btn:"اطلب الوصول",email:"أدخل بريدك"},
+  es:{join:"Únete",btn:"Acceso",email:"Introduce correo"}
+};
+
+let currentLang='en';
+
+langBtn.onclick=()=>{
+  currentLang = currentLang==='en'?'ar':currentLang==='ar'?'es':'en';
+
+  joinText.innerText = langData[currentLang].join;
+  btnText.innerText = langData[currentLang].btn;
+  emailInput.placeholder = langData[currentLang].email;
+
+  document.body.dir = currentLang==='ar'?'rtl':'ltr';
+  langBtn.innerText = currentLang.toUpperCase();
 };
 
 </script>
