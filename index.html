@@ -6,94 +6,187 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHAKTI — Ritual of Radiance</title>
 
-<!-- FAVICON -->
-
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="favicon-32x32.png">
 <link rel="manifest" href="site.webmanifest">
-
-<!-- FONTS -->
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;color:#fff;background:#000;overflow:hidden}
-
-/* VIDEO */
-video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.overlay{position:fixed;width:100%;height:100%;background:linear-gradient(to bottom, rgba(0,0,0,0.3), #000);z-index:-1}
-
-/* INTRO */
-.intro{position:fixed;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
-.intro img{width:260px;animation:introAnim 3s ease forwards}
-@keyframes introAnim{
-0%{opacity:0;transform:scale(0.8);filter:blur(10px)}
-50%{opacity:1;transform:scale(1.05);filter:blur(0)}
-100%{opacity:1;transform:scale(1)}
+body{
+  font-family:'Inter',sans-serif;
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* TEXT */
-section{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}
-.logo{width:240px;margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(212,175,55,0.4))}
-h1{font-family:'Playfair Display',serif;font-size:64px;letter-spacing:6px;margin-bottom:20px}
-.tagline{opacity:0.8;margin-bottom:30px;letter-spacing:2px}
+/* VIDEO */
+video{
+  position:fixed;
+  width:100%;height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
 
-/* FORM */
-input{width:100%;padding:14px;border-radius:30px;border:none;margin-bottom:15px}
-button{width:100%;padding:14px;border-radius:30px;border:none;background:#d4af37;color:#000;font-weight:bold}
-
-/* SOCIAL */
-.social-bar{position:fixed;top:50%;left:20px;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px}
-.social-bar a{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.08);color:#fff;transition:.3s}
-.social-bar a:hover{background:#d4af37;transform:scale(1.1)}
-
-/* BUTTON */
-.mail-fab{position:fixed;bottom:30px;right:30px;padding:14px 22px;border-radius:40px;background:#d4af37;color:#000;font-weight:600;text-decoration:none}
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;height:100%;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.2), #000);
+  z-index:-1;
+  backdrop-filter: blur(0px);
+  transition:0.2s;
+}
 
 /* CURSOR */
-.cursor{position:fixed;width:120px;height:120px;background:radial-gradient(circle, rgba(212,175,55,0.25), transparent);pointer-events:none;transform:translate(-50%,-50%)}
+.cursor{
+  position:fixed;
+  width:140px;height:140px;
+  background:radial-gradient(circle, rgba(212,175,55,0.25), transparent 70%);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:9999;
+  mix-blend-mode:screen;
+}
+
+/* PARTICLES */
+.particles span{
+  position:fixed;
+  width:3px;height:3px;
+  background:rgba(212,175,55,0.4);
+  border-radius:50%;
+  animation:float 15s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh) scale(0)}
+  100%{transform:translateY(-10vh) scale(1.2)}
+}
+
+/* SECTIONS */
+section{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+
+/* LOGO */
+.logo{
+  width:240px;
+  margin-bottom:20px;
+  filter:drop-shadow(0 0 20px rgba(212,175,55,0.4));
+}
+
+/* TEXT REVEAL (Dior style) */
+.reveal span{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(30px);
+  animation:reveal 1s forwards;
+}
+.reveal span:nth-child(1){animation-delay:.1s}
+.reveal span:nth-child(2){animation-delay:.2s}
+.reveal span:nth-child(3){animation-delay:.3s}
+.reveal span:nth-child(4){animation-delay:.4s}
+.reveal span:nth-child(5){animation-delay:.5s}
+@keyframes reveal{
+  to{opacity:1;transform:translateY(0)}
+}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:64px;
+  letter-spacing:6px;
+}
+
+.tagline{
+  opacity:0.8;
+  margin-top:20px;
+  letter-spacing:2px;
+}
+
+/* FORM */
+input{width:100%;padding:14px;border-radius:30px;border:none;margin-top:20px}
+button{width:100%;padding:14px;border-radius:30px;border:none;background:#d4af37;color:#000;margin-top:10px}
+
+/* SOCIAL */
+.social-bar{
+  position:fixed;
+  top:50%;left:20px;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.social-bar a{
+  width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  transition:.3s;
+}
+.social-bar a:hover{
+  background:#d4af37;
+  transform:scale(1.1);
+}
+
+/* BUTTON */
+.mail-fab{
+  position:fixed;
+  bottom:30px;right:30px;
+  padding:14px 22px;
+  border-radius:40px;
+  background:#d4af37;
+  color:#000;
+  font-weight:600;
+  text-decoration:none;
+}
 </style>
 
 </head>
 
 <body>
 
-<!-- CURSOR -->
-
 <div class="cursor" id="cursor"></div>
-
-<!-- AUDIO -->
 
 <audio id="ambient" src="ambient.mp3" loop></audio> <audio id="whisper" src="whisper.mp3"></audio>
 
-<!-- INTRO -->
-
-<div class="intro">
-  <img src="shakti_logo_clean_glow.png">
-</div>
-
-<!-- VIDEO -->
-
-<video autoplay muted loop playsinline>
-  <source src="video.mp4" type="video/mp4">
+<video autoplay muted loop>
+  <source src="video.mp4">
 </video>
 
-<div class="overlay"></div>
+<div class="overlay" id="overlay"></div>
 
-<!-- MAIN -->
+<div class="particles">
+  <span style="left:10%"></span>
+  <span style="left:30%"></span>
+  <span style="left:50%"></span>
+  <span style="left:70%"></span>
+  <span style="left:90%"></span>
+</div>
 
 <section>
   <div>
     <img src="shakti_logo_clean_glow.png" class="logo">
-    <h1>SHAKTI</h1>
-    <p class="tagline">COMING SOON — THE RITUAL BEGINS</p>
+
+```
+<h1 class="reveal">
+  <span>S</span><span>H</span><span>A</span><span>K</span><span>T</span><span>I</span>
+</h1>
+
+<p class="tagline">COMING SOON — THE RITUAL BEGINS</p>
+```
+
   </div>
 </section>
 
-<section>
-  <div>
+<section id="join">
+  <div style="max-width:400px;">
     <h1>Join the Ritual</h1>
     <p class="tagline">Be the first to access SHAKTI before the world.</p>
 
@@ -107,8 +200,6 @@ button{width:100%;padding:14px;border-radius:30px;border:none;background:#d4af37
   </div>
 </section>
 
-<!-- SOCIAL -->
-
 <div class="social-bar">
   <a href="https://www.youtube.com/@SHAKTIBEAUTY">▶</a>
   <a href="https://x.com/SHAKTI_BEAUTY">X</a>
@@ -116,26 +207,41 @@ button{width:100%;padding:14px;border-radius:30px;border:none;background:#d4af37
   <a href="https://www.facebook.com/Shaktibeauty.co">f</a>
 </div>
 
-<a href="mailto:hello@shakti.beauty" class="mail-fab">Join the Ritual</a>
+<a href="#join" class="mail-fab">Join the Ritual</a>
 
 <script>
-// intro hide
-setTimeout(()=>{document.querySelector('.intro').style.display='none'},3000);
 
-// cursor glow
-const c=document.getElementById('cursor');
+// CURSOR + BLUR
+const cursor=document.getElementById('cursor');
+const overlay=document.getElementById('overlay');
+
 document.addEventListener('mousemove',e=>{
-c.style.left=e.clientX+'px';
-c.style.top=e.clientY+'px';
+  cursor.style.left=e.clientX+'px';
+  cursor.style.top=e.clientY+'px';
+
+  overlay.style.backdropFilter=`blur(${(e.clientX/window.innerWidth)*6}px)`;
 });
 
-// sound
-const a=document.getElementById('ambient');
-document.addEventListener('click',()=>{if(a.paused){a.volume=0.3;a.play()}});
+// SOUND
+const ambient=document.getElementById('ambient');
+const whisper=document.getElementById('whisper');
 
-// whisper
-const w=document.getElementById('whisper');
-setTimeout(()=>{w.volume=0.4;w.play().catch(()=>{})},1500);
+document.addEventListener('click',()=>{
+  if(ambient.paused){
+    ambient.volume=0.3;
+    ambient.play();
+  }
+  whisper.volume=0.9;
+  whisper.play().catch(()=>{});
+});
+
+// PARALLAX
+window.addEventListener('scroll',()=>{
+  document.querySelectorAll('section').forEach((el,i)=>{
+    el.style.transform=`translateY(${window.scrollY*(0.05*(i+1))}px)`;
+  });
+});
+
 </script>
 
 </body>
