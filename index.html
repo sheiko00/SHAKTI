@@ -6,16 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHAKTI — Ritual of Radiance</title>
 
-<!-- PRELOAD -->
-
-<link rel="preload" as="video" href="video.mp4" type="video/mp4">
+<link rel="preload" as="video" href="video.mp4">
 <link rel="preload" as="image" href="shakti_logo_clean_glow.png">
-
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" href="favicon-32x32.png">
-<link rel="manifest" href="site.webmanifest">
-
-<!-- FONTS -->
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
 
@@ -27,12 +19,6 @@ body{
   background:#000;
   color:#fff;
   overflow-x:hidden;
-  -webkit-tap-highlight-color:transparent;
-}
-
-/* Arabic */
-body[dir="rtl"]{
-  font-family:'Cairo',sans-serif;
 }
 
 /* INTRO */
@@ -50,10 +36,7 @@ body[dir="rtl"]{
   cursor:pointer;
   transition:1s;
 }
-.touch-intro.hide{
-  opacity:0;
-  pointer-events:none;
-}
+.touch-intro.hide{opacity:0;pointer-events:none}
 
 /* VIDEO */
 video{
@@ -69,15 +52,38 @@ video{
   position:fixed;
   width:100%;
   height:100%;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.2), #000);
+  background:linear-gradient(to bottom, rgba(0,0,0,0.3), #000);
   z-index:-1;
 }
 
-/* LOGO */
+/* FLOATING LOGO */
+.logo-wrap{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  transition:all 0.6s ease;
+  z-index:100;
+}
+
+.logo-wrap.small{
+  top:20px;
+  left:50%;
+  transform:translateX(-50%) scale(0.5);
+}
+
 .logo{
   width:220px;
-  animation:pulse 6s ease-in-out infinite;
-  filter:drop-shadow(0 0 12px rgba(212,175,55,0.35));
+  opacity:0;
+  transform:scale(0.7);
+  filter:blur(10px);
+  animation:logoReveal 2.5s ease forwards, pulse 6s ease-in-out infinite 2.5s;
+}
+
+@keyframes logoReveal{
+  0%{opacity:0;transform:scale(0.7);filter:blur(10px)}
+  50%{opacity:1;transform:scale(1.05);filter:blur(2px)}
+  100%{opacity:1;transform:scale(1);filter:blur(0)}
 }
 
 @keyframes pulse{
@@ -85,6 +91,18 @@ video{
   50%{transform:scale(1.03)}
 }
 
+/* REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(50px);
+  transition:all 1.4s ease;
+}
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* SECTIONS */
 section{
   height:100vh;
   display:flex;
@@ -93,14 +111,32 @@ section{
   text-align:center;
 }
 
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:48px;
+/* EMAIL BOX */
+.email-box{
+  background:rgba(255,255,255,0.05);
+  padding:30px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  max-width:350px;
 }
 
-.tagline{
-  margin-top:15px;
-  opacity:0.8;
+input{
+  width:100%;
+  padding:14px;
+  border-radius:30px;
+  border:none;
+  margin-top:20px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border-radius:30px;
+  border:none;
+  background:#d4af37;
+  color:#000;
+  margin-top:10px;
+  font-weight:bold;
 }
 
 /* SOCIAL */
@@ -117,10 +153,10 @@ h1{
 .social-bar a{
   width:48px;
   height:48px;
-  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
+  border-radius:50%;
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(6px);
   transition:0.3s;
@@ -128,13 +164,37 @@ h1{
 
 .social-bar svg{
   width:20px;
+  height:20px;
   fill:#d4af37;
 }
 
-.social-bar a:hover,
-.social-bar a:active{
+.social-bar a:hover{
   transform:scale(1.2);
-  box-shadow:0 0 15px rgba(212,175,55,0.5);
+  box-shadow:0 0 15px rgba(212,175,55,0.6);
+}
+
+/* SOUND */
+.sound-toggle{
+  position:fixed;
+  top:20px;
+  right:80px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:rgba(212,175,55,0.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  color:#d4af37;
+}
+
+/* LANGUAGE */
+.lang-switcher{
+  position:fixed;
+  top:20px;
+  right:20px;
+  color:#d4af37;
 }
 
 /* BUTTON */
@@ -148,54 +208,6 @@ h1{
   color:#000;
   text-decoration:none;
 }
-
-/* LANGUAGE */
-.lang-switcher{
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:9999;
-}
-
-.lang-current{
-  padding:10px;
-  border-radius:30px;
-  background:rgba(255,255,255,0.05);
-  color:#d4af37;
-  cursor:pointer;
-}
-
-.lang-menu{
-  display:none;
-  margin-top:10px;
-  flex-direction:column;
-}
-
-.lang-menu div{
-  padding:8px;
-  cursor:pointer;
-}
-
-/* SOUND */
-.sound-toggle{
-  position:fixed;
-  top:20px;
-  right:70px;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.05);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  color:#d4af37;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  h1{font-size:32px}
-}
 </style>
 
 </head>
@@ -204,15 +216,7 @@ h1{
 
 <div class="touch-intro" id="intro">Tap to Begin</div>
 
-<div class="lang-switcher">
-  <div class="lang-current">EN</div>
-  <div class="lang-menu">
-    <div data-lang="en">EN</div>
-    <div data-lang="ar">AR</div>
-    <div data-lang="es">ES</div>
-  </div>
-</div>
-
+<div class="lang-switcher">EN</div>
 <div class="sound-toggle" id="soundToggle">🔊</div>
 
 <audio id="ambient" src="ambient.mp3" loop></audio> <audio id="whisper" src="whisper.mp3"></audio>
@@ -223,57 +227,61 @@ h1{
 
 <div class="overlay"></div>
 
+<!-- FLOATING LOGO -->
+
+<div class="logo-wrap" id="logoWrap">
+  <img src="shakti_logo_clean_glow.png" class="logo">
+</div>
+
 <section>
-  <div>
-    <img src="shakti_logo_clean_glow.png" class="logo">
+  <div class="reveal">
     <h1>SHAKTI</h1>
-    <p class="tagline">COMING SOON — THE RITUAL BEGINS</p>
+    <p>COMING SOON — THE RITUAL BEGINS</p>
   </div>
 </section>
 
-<section id="join">
-  <div>
-    <h1>Join the Ritual</h1>
+<section>
+  <div class="email-box reveal">
+    <h2>Join the Ritual</h2>
     <input type="email" placeholder="Enter your email">
     <button>Request Access</button>
   </div>
 </section>
 
 <div class="social-bar">
-<a href="#"><svg viewBox="0 0 24 24"><path d="M23.5..."/></svg></a>
-<a href="#"><svg viewBox="0 0 24 24"><path d="M18.9..."/></svg></a>
-<a href="#"><svg viewBox="0 0 24 24"><path d="M7..."/></svg></a>
-<a href="#"><svg viewBox="0 0 24 24"><path d="M22..."/></svg></a>
+<a href="#"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1..."/></svg></a>
+<a href="#"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.5 8.6..."/></svg></a>
+<a href="#"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1..."/></svg></a>
+<a href="#"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1..."/></svg></a>
 </div>
 
 <script>
 
 // INTRO
-function enterSite(){
+intro.onclick = intro.ontouchstart = ()=>{
   intro.classList.add('hide');
   ambient.play().catch(()=>{});
   whisper.play().catch(()=>{});
-}
-intro.addEventListener('click',enterSite);
-intro.addEventListener('touchstart',enterSite);
-
-// LANGUAGE
-const translations={
-en:{tag:"COMING SOON — THE RITUAL BEGINS",join:"Join the Ritual"},
-ar:{tag:"قريباً — الطقس يبدأ",join:"انضم"},
-es:{tag:"PRÓXIMAMENTE",join:"Únete"}
 };
 
-document.querySelectorAll('.lang-menu div').forEach(el=>{
-  el.onclick=()=>{
-    const l=el.dataset.lang;
-    document.querySelector('.tagline').innerText=translations[l].tag;
-    document.querySelector('#join h1').innerText=translations[l].join;
-    document.body.dir=l==='ar'?'rtl':'ltr';
+// REVEAL
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('show');
+  });
+},{threshold:0.2});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// FLOATING LOGO
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY > 100){
+    logoWrap.classList.add('small');
+  }else{
+    logoWrap.classList.remove('small');
   }
 });
 
-// SOUND
+// MUTE
 let muted=false;
 soundToggle.onclick=()=>{
   muted=!muted;
