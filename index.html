@@ -8,99 +8,89 @@
     <style>
         /* CSS STYLES */
         *{margin:0;padding:0;box-sizing:border-box} 
-        body{ background:#000; color:#fff; font-family:'Inter', sans-serif; overflow-x:hidden; } 
+        body{ background:#000; color:#fff; font-family:'Inter', sans-serif; overflow-x:hidden; transition: background 0.5s; } 
         body[dir="rtl"]{font-family:'Cairo', sans-serif} 
 
-        /* VIDEO & OVERLAY */
-        video{ position:fixed; width:100%; height:100%; object-fit:cover; z-index:-2; } 
-        .overlay{ position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:-1; } 
+        /* VIDEO */
+        video#ambient-video{ position:fixed; width:100%; height:100%; object-fit:cover; z-index:-2; } 
+        .overlay{ position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:-1; } 
 
         /* INTRO */
         .intro{ 
-            position:fixed; width:100%;height:100%; 
-            display:flex;align-items:center;justify-content:center; 
+            position:fixed; top:0; left:0; width:100%; height:100%; 
+            display:flex; align-items:center; justify-content:center; 
             background:#000; z-index:9999; cursor:pointer; 
             font-family:'Playfair Display'; font-size:24px; 
-            letter-spacing:6px; transition:opacity 0.8s ease; 
+            letter-spacing:6px; transition: opacity 0.8s ease, visibility 0.8s; 
         } 
-        .intro.hide{opacity:0;pointer-events:none} 
+        .intro.hide{opacity:0; visibility: hidden; pointer-events:none} 
 
         /* LOGO */
         .logo-wrap{ 
             position:relative; margin-bottom:20px; 
-            transition:.5s; z-index:1000; 
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index:1000; 
             animation: floatWrap 6s ease-in-out infinite; 
         } 
         .logo-wrap.small{ 
-            position:fixed; top:12px; left:50%; 
-            transform:translateX(-50%) scale(.5); opacity:.75; 
+            position:fixed; top:20px; left:50%; 
+            transform: translateX(-50%) scale(0.4); opacity:0.8; 
         } 
         .logo{ 
-            width:200px; display:block; 
+            width:180px; display:block; margin: 0 auto;
             animation: logoReveal 1.8s ease forwards, heartbeatGlow 8s infinite; 
         } 
 
         @keyframes logoReveal{ from{opacity:0;transform:scale(.6)} to{opacity:1;transform:scale(1)} } 
-        @keyframes floatWrap{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} } 
+        @keyframes floatWrap{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} } 
         @keyframes heartbeatGlow{ 
             0%,92%,100%{filter:drop-shadow(0 0 0 rgba(212,175,55,0))} 
-            95%{ filter:drop-shadow(0 0 12px rgba(212,175,55,0.6)) drop-shadow(0 0 25px rgba(212,175,55,0.3)); } 
+            95%{ filter:drop-shadow(0 0 15px rgba(212,175,55,0.6)); } 
         } 
 
-        .logo:hover{ filter:drop-shadow(0 0 20px rgba(212,175,55,0.8)); } 
+        /* TEXT & SECTION */
+        section{ height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; flex-direction: column; } 
+        h1{ font-family:'Playfair Display'; font-size:54px; letter-spacing:8px; margin-bottom: 5px; color: #d4af37; } 
+        .tag{opacity:0.6; font-size: 16px; letter-spacing: 3px; text-transform: uppercase;} 
 
-        /* TEXT */
-        h1{ font-family:'Playfair Display'; font-size:44px; letter-spacing:5px; margin-bottom: 10px; } 
-        .tag{opacity:.7;margin-top:10px; font-size: 18px; letter-spacing: 2px;} 
-
-        /* SECTION */
-        section{ height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding: 20px; } 
-
-        /* EMAIL BOX */
+        /* FORM BOX */
         .box{ 
-            background:rgba(255,255,255,0.06); padding:40px; 
-            border-radius:20px; backdrop-filter:blur(12px); 
-            border: 1px solid rgba(212,175,55,0.2);
-            max-width: 400px; width: 100%;
+            background:rgba(255,255,255,0.05); padding:30px; 
+            border-radius:24px; backdrop-filter:blur(15px); 
+            border: 1px solid rgba(212,175,55,0.15);
+            max-width: 380px; width: 90%; margin-top: 40px;
         } 
         input{ 
-            width:100%; padding:14px; border-radius:25px; 
-            border:1px solid rgba(255,255,255,0.2); margin-top:15px; 
-            background: rgba(0,0,0,0.3); color: #fff; text-align: center;
+            width:100%; padding:14px 20px; border-radius:30px; 
+            border:1px solid rgba(255,255,255,0.1); margin-top:20px; 
+            background: rgba(0,0,0,0.4); color: #fff; text-align: center; outline: none;
         } 
-        button#btn{ 
-            width:100%; padding:14px; border-radius:25px; 
+        #btn{ 
+            width:100%; padding:14px; border-radius:30px; 
             border:none; background:#d4af37; color:#000; 
-            margin-top:15px; cursor: pointer; font-weight: bold;
-            transition: 0.3s;
+            margin-top:15px; cursor: pointer; font-weight: 700;
+            transition: 0.3s; text-transform: uppercase;
         } 
-        button#btn:hover{ background: #f1c40f; transform: scale(1.02); }
+        #btn:hover{ background: #fff; transform: translateY(-2px); }
 
         /* CONTROLS */
-        .ctrl{ position:fixed; top:20px; right:20px; z-index:3000; } 
+        .ctrl{ position:fixed; top:25px; right:25px; z-index:3000; display: flex; gap: 10px; } 
         .ctrl button{ 
-            width:45px;height:45px; border-radius:50%; 
-            background:#d4af37; color:#000; border:none; 
-            margin-left:8px; cursor:pointer; font-weight: bold;
+            width:40px; height:40px; border-radius:50%; 
+            background:rgba(212,175,55,0.9); color:#000; border:none; 
+            cursor:pointer; font-weight: bold; display: flex; align-items:center; justify-content:center;
         } 
 
-        /* LIGHT EFFECT */
+        /* MOUSE LIGHT */
         .light{ 
-            position:fixed; width:250px;height:250px; 
-            border-radius:50%; background:radial-gradient(circle,rgba(212,175,55,0.15),transparent 70%); 
+            position:fixed; width:300px; height:300px; 
+            border-radius:50%; background:radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%); 
             pointer-events:none; transform:translate(-50%,-50%); 
-            opacity:0; z-index:2000; transition: opacity 0.3s;
+            opacity:0; z-index:2000; transition: opacity 0.5s;
         } 
 
-        /* REVEAL ANIMATION */
-        .reveal{opacity:0;transform:translateY(30px);transition:1.2s ease-out} 
-        .reveal.show{opacity:1;transform:translateY(0)} 
-
-        /* MOBILE */
-        @media (max-width:768px){ 
-            .logo{width:140px} 
-            h1{font-size:32px} 
-        }
+        /* REVEAL */
+        .reveal{opacity:0; transform:translateY(20px); transition: 1.5s cubic-bezier(0.2, 1, 0.3, 1);} 
+        .reveal.show{opacity:1; transform:translateY(0)} 
     </style>
 </head>
 <body>
@@ -108,137 +98,107 @@
     <div class="intro" id="intro">TAP TO BEGIN</div>
 
     <video id="ambient-video" autoplay muted loop playsinline>
-        <source src="your-video-file.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-golden-liquid-waves-background-34502-large.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
 
     <div class="ctrl">
-        <button id="lang">AR</button>
-        <button id="mute">🔊</button>
+        <button id="langBtn">AR</button>
+        <button id="muteBtn">🔊</button>
     </div>
 
     <section>
-        <div class="content">
-            <div class="logo-wrap" id="logoWrap">
-                <img src="your-logo.png" alt="SHAKTI" class="logo" id="mainLogo">
-            </div>
-            
-            <div class="reveal">
-                <h1 id="title">SHAKTI</h1>
-                <p class="tag" id="tag">COMING SOON — THE RITUAL BEGINS</p>
-            </div>
+        <div class="logo-wrap" id="logoWrap">
+            <img src="https://cdn-icons-png.flaticon.com/512/3665/3665917.png" alt="SHAKTI" class="logo">
+        </div>
+        
+        <div class="reveal">
+            <h1 id="title">SHAKTI</h1>
+            <p class="tag" id="tagText">COMING SOON — THE RITUAL BEGINS</p>
+        </div>
 
-            <div class="box reveal" style="margin-top: 40px;">
-                <h3 id="join">Join the Ritual</h3>
-                <input type="email" id="mailInput" placeholder="Enter your email">
-                <button id="btn">Request Access</button>
-            </div>
+        <div class="box reveal">
+            <h3 id="joinTitle">Join the Ritual</h3>
+            <input type="email" id="mailInput" placeholder="Enter your email">
+            <button id="btn">Request Access</button>
         </div>
     </section>
 
-    <audio id="ambient-audio" loop>
-        <source src="ambient-sound.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="whisper-audio">
-        <source src="whisper-sound.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
+        // تحديد العناصر بعد تحميل الصفحة لضمان وجودها
         const intro = document.getElementById('intro');
-        const ambient = document.getElementById('ambient-audio');
-        const whisper = document.getElementById('whisper-audio');
         const logoWrap = document.getElementById('logoWrap');
-        const muteBtn = document.getElementById('mute');
-        const langBtn = document.getElementById('lang');
-        const tag = document.getElementById('tag');
-        const join = document.getElementById('join');
+        const muteBtn = document.getElementById('muteBtn');
+        const langBtn = document.getElementById('langBtn');
+        const tagText = document.getElementById('tagText');
+        const joinTitle = document.getElementById('joinTitle');
         const btn = document.getElementById('btn');
         const mailInput = document.getElementById('mailInput');
+        const video = document.getElementById('ambient-video');
 
-        // LIGHT EFFECT
+        // تأثير الإضاءة مع الماوس
         const light = document.createElement('div');
         light.className = 'light';
         document.body.appendChild(light);
 
-        document.onmousemove = e => {
+        document.addEventListener('mousemove', e => {
             light.style.opacity = 1;
             light.style.left = e.clientX + 'px';
             light.style.top = e.clientY + 'px';
-        }
-
-        document.addEventListener('touchmove', e => {
-            light.style.opacity = 1;
-            light.style.left = e.touches[0].clientX + 'px';
-            light.style.top = e.touches[0].clientY + 'px';
         });
 
-        // INTRO CLICK
-        intro.onclick = () => {
+        // تشغيل الموقع عند الضغط على Intro
+        intro.addEventListener('click', () => {
             intro.classList.add('hide');
-            setTimeout(() => intro.style.display = "none", 800);
-            
-            // Start Audio
-            ambient.volume = 0.3;
-            ambient.play().catch(e => console.log("Audio play blocked"));
-            setTimeout(() => whisper.play().catch(e => {}), 700);
-        }
+            // محاولة تشغيل الفيديو بصوت إذا أردت (المتصفحات تمنع الصوت التلقائي)
+            video.muted = false; 
+        });
 
-        // HEARTBEAT LOGIC
-        let isMuted = false;
-        function heartbeat() {
-            if (!isMuted) {
-                whisper.currentTime = 0;
-                whisper.volume = 0.2;
-                whisper.play().catch(e => {});
+        // تغيير حجم اللوجو عند السكرول
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                logoWrap.classList.add('small');
+            } else {
+                logoWrap.classList.remove('small');
             }
-        }
-        setTimeout(heartbeat, 4000);
-        setInterval(heartbeat, 8000);
+        });
 
-        // SCROLL EFFECT
-        window.onscroll = () => {
-            if (window.scrollY > 100) logoWrap.classList.add('small');
-            else logoWrap.classList.remove('small');
-        }
-
-        // REVEAL ON SCROLL
-        const obs = new IntersectionObserver(entries => {
-            entries.forEach(el => {
-                if (el.isIntersecting) el.target.classList.add('show');
+        // تأثير الظهور التدريجي (Intersection Observer)
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('show');
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // MUTE TOGGLE
-        muteBtn.onclick = () => {
-            isMuted = !isMuted;
-            ambient.muted = isMuted;
-            whisper.muted = isMuted;
-            muteBtn.innerText = isMuted ? '🔇' : '🔊';
-        }
+        // كتم الصوت
+        muteBtn.addEventListener('click', () => {
+            video.muted = !video.muted;
+            muteBtn.innerText = video.muted ? '🔇' : '🔊';
+        });
 
-        // LANGUAGE TOGGLE
+        // تبديل اللغة
         let currentLang = 'en';
-        langBtn.onclick = () => {
-            currentLang = currentLang === 'en' ? 'ar' : 'en';
+        langBtn.addEventListener('click', () => {
+            currentLang = (currentLang === 'en') ? 'ar' : 'en';
             
             if(currentLang === 'ar') {
-                tag.innerText = 'قريباً — الطقس يبدأ';
-                join.innerText = 'انضم الآن';
+                tagText.innerText = 'قريباً — الطقس يبدأ';
+                joinTitle.innerText = 'انضم إلى الطقوس';
                 btn.innerText = 'اطلب الوصول';
                 mailInput.placeholder = 'أدخل بريدك الإلكتروني';
                 document.body.dir = 'rtl';
                 langBtn.innerText = 'EN';
             } else {
-                tag.innerText = 'COMING SOON — THE RITUAL BEGINS';
-                join.innerText = 'Join the Ritual';
+                tagText.innerText = 'COMING SOON — THE RITUAL BEGINS';
+                joinTitle.innerText = 'Join the Ritual';
                 btn.innerText = 'Request Access';
                 mailInput.placeholder = 'Enter your email';
                 document.body.dir = 'ltr';
                 langBtn.innerText = 'AR';
             }
-        }
+        });
     </script>
 </body>
 </html>
