@@ -7,12 +7,11 @@
 
 <title>SHAKTI — Ritual</title>
 
-  <!-- FAVICONS -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-  
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&family=Cairo&display=swap" rel="stylesheet">
 
 <style>
@@ -26,11 +25,11 @@ body{
 }
 body[dir="rtl"]{font-family:Cairo}
 
-/* ===== LAYERS FIX ===== */
+/* VIDEO */
 video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
 .overlay{position:fixed;width:100%;height:100%;background:#0008;z-index:-1}
 
-/* ===== INTRO FIX ===== */
+/* INTRO */
 .intro{
   position:fixed;
   width:100%;height:100%;
@@ -39,12 +38,12 @@ video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
   z-index:9999;
   cursor:pointer;
   font-family:'Playfair Display';
-  font-size:22px;
-  letter-spacing:5px;
+  font-size:24px;
+  letter-spacing:6px;
 }
 .intro.hide{opacity:0;pointer-events:none}
 
-/* ===== LOGO FIX ===== */
+/* LOGO */
 .logo-wrap{
   position:relative;
   margin-bottom:20px;
@@ -58,14 +57,21 @@ video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
   left:50%;
   transform:translateX(-50%) scale(.5);
   opacity:.7;
-  z-index:1000;
 }
 
 .logo{
   width:200px;
   display:block;
-  opacity:0;
-  animation:logoReveal 1.8s forwards paused;
+  opacity:1;
+  transition:0.4s;
+  animation:logoReveal 1.8s ease forwards;
+}
+
+/* 🔥 GLOW EFFECT */
+.logo:hover{
+  filter:drop-shadow(0 0 15px rgba(212,175,55,0.8))
+         drop-shadow(0 0 30px rgba(212,175,55,0.5));
+  transform:scale(1.05);
 }
 
 @keyframes logoReveal{
@@ -73,15 +79,15 @@ video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
   to{opacity:1;transform:scale(1)}
 }
 
-/* ===== TEXT ===== */
+/* TEXT */
 h1{
-  font-family:Playfair Display;
+  font-family:'Playfair Display';
   font-size:44px;
   letter-spacing:5px;
 }
 .tag{opacity:.7;margin-top:10px}
 
-/* ===== SECTIONS ===== */
+/* SECTION */
 section{
   height:100vh;
   display:flex;
@@ -92,7 +98,7 @@ section{
   z-index:1;
 }
 
-/* ===== EMAIL ===== */
+/* EMAIL */
 .box{
   background:#ffffff10;
   padding:25px;
@@ -118,7 +124,7 @@ button{
   margin-top:10px;
 }
 
-/* ===== SOCIAL FIX ===== */
+/* SOCIAL */
 .social{
   position:fixed;
   left:15px;
@@ -126,6 +132,7 @@ button{
   transform:translateY(-50%);
   z-index:3000;
 }
+
 .social a{
   display:block;
   margin:12px 0;
@@ -134,19 +141,21 @@ button{
   background:#ffffff15;
   display:flex;align-items:center;justify-content:center;
 }
+
 .social svg{
   fill:#d4af37;
   width:22px;
   height:22px;
 }
 
-/* ===== CONTROLS ===== */
+/* CONTROLS */
 .ctrl{
   position:fixed;
   top:15px;
   right:15px;
   z-index:3000;
 }
+
 .ctrl button{
   width:38px;height:38px;
   border-radius:50%;
@@ -157,7 +166,7 @@ button{
   cursor:pointer;
 }
 
-/* ===== EMAIL FLOAT ===== */
+/* MAIL */
 .mail{
   position:fixed;
   bottom:20px;
@@ -170,7 +179,7 @@ button{
   z-index:3000;
 }
 
-/* ===== LIGHT ===== */
+/* LIGHT */
 .light{
   position:fixed;
   width:180px;height:180px;
@@ -182,7 +191,7 @@ button{
   z-index:2000;
 }
 
-/* ===== REVEAL ===== */
+/* REVEAL */
 .reveal{opacity:0;transform:translateY(30px);transition:1s}
 .reveal.show{opacity:1;transform:translateY(0)}
 </style>
@@ -207,7 +216,7 @@ button{
 <section>
 <div class="reveal">
 <div class="logo-wrap" id="logoWrap">
-<img src="logo.png" class="logo">
+<img src="shakti_logo_clean_glow.png" class="logo">
 </div>
 <h1>SHAKTI</h1>
 <p class="tag" id="tag">COMING SOON — THE RITUAL BEGINS</p>
@@ -225,8 +234,19 @@ button{
 <!-- SOCIAL -->
 
 <div class="social">
-<a href="#"><svg viewBox="0 0 24 24"><path d="M23.498 6.186c..."/></svg></a>
-<a href="#"><svg viewBox="0 0 24 24"><path d="M22 12a10..."/></svg></a>
+
+<a href="https://www.youtube.com/@SHAKTIBEAUTY" target="_blank">
+<svg viewBox="0 0 24 24">
+<path d="M23.498 6.186a2.997 2.997 0 0 0-2.109-2.122C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.389.564A2.997 2.997 0 0 0 .502 6.186A31.29 31.29 0 0 0 0 12a31.29 31.29 0 0 0 .502 5.814 2.997 2.997 0 0 0 2.109 2.122C4.495 20.5 12 20.5 12 20.5s7.505 0 9.389-.564a2.997 2.997 0 0 0 2.109-2.122A31.29 31.29 0 0 0 24 12a31.29 31.29 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+</svg>
+</a>
+
+<a href="https://www.facebook.com/Shaktibeauty.co" target="_blank">
+<svg viewBox="0 0 24 24">
+<path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.1V12h2.4V9.8c0-2.38 1.42-3.7 3.6-3.7 1.04 0 2.12.18 2.12.18v2.33h-1.2c-1.18 0-1.55.73-1.55 1.48V12h2.64l-.42 2.88h-2.22v6.99A10 10 0 0022 12z"/>
+</svg>
+</a>
+
 </div>
 
 <a href="mailto:hello@shakti.beauty" class="mail">Email</a>
@@ -248,14 +268,12 @@ document.onmousemove=e=>{
 intro.onclick=()=>{
   intro.classList.add('hide')
 
+  setTimeout(()=>{intro.style.display="none"},800)
+
   ambient.volume=.3
   ambient.play()
 
   setTimeout(()=>whisper.play(),700)
-
-  setTimeout(()=>{
-    document.querySelector('.logo').style.animationPlayState='running'
-  },500)
 }
 
 // FLOAT LOGO
