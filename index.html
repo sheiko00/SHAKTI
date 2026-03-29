@@ -61,18 +61,21 @@ video{
   z-index:-1;
 }
 
-/* LOGO FLOAT */
+/* LOGO (normal) */
 .logo-wrap{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
+  position:relative;
+  margin-bottom:20px;
   transition:0.6s ease;
-  z-index:1000;
 }
+
 .logo-wrap.small{
+  position:fixed;
   top:15px;
+  left:50%;
   transform:translateX(-50%) scale(0.5);
+  z-index:1000;
+  opacity:0.7;
+  filter:blur(0.5px);
 }
 
 .logo{
@@ -92,9 +95,25 @@ video{
   50%{transform:scale(1.03)}
 }
 
-/* TEXT */
-h1{font-family:'Playfair Display';font-size:48px}
-.tagline{opacity:0.8}
+/* TEXT CINEMATIC */
+h1{
+  font-family:'Playfair Display';
+  font-size:48px;
+  letter-spacing:6px;
+  opacity:0;
+  transform:translateY(20px);
+  animation:textReveal 1.5s ease forwards;
+  animation-delay:1s;
+}
+.tagline{
+  opacity:0;
+  letter-spacing:3px;
+  animation:textReveal 1.5s ease forwards;
+  animation-delay:1.4s;
+}
+@keyframes textReveal{
+  to{opacity:1;transform:translateY(0)}
+}
 
 /* SECTIONS */
 section{
@@ -114,6 +133,7 @@ section{
   max-width:350px;
 }
 
+/* INPUT */
 input{
   width:100%;
   padding:14px;
@@ -122,6 +142,7 @@ input{
   margin-top:20px;
 }
 
+/* BUTTON */
 button{
   width:100%;
   padding:14px;
@@ -141,6 +162,7 @@ button{
   display:flex;
   flex-direction:column;
   gap:14px;
+  z-index:1100;
 }
 .social-bar a{
   width:48px;height:48px;border-radius:50%;
@@ -163,10 +185,7 @@ button{
   width:40px;height:40px;border-radius:50%;
   background:rgba(212,175,55,0.2)!important;
   color:#d4af37!important;
-  border:none;outline:none;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
-  -webkit-appearance:none;
+  border:none;
 }
 
 /* MAIL */
@@ -225,12 +244,11 @@ button{
 
 <div class="overlay"></div>
 
-<div class="logo-wrap" id="logoWrap">
-  <img src="shakti_logo_clean_glow.png" class="logo">
-</div>
-
 <section>
   <div class="reveal">
+    <div class="logo-wrap" id="logoWrap">
+      <img src="shakti_logo_clean_glow.png" class="logo">
+    </div>
     <h1>SHAKTI</h1>
     <p id="taglineText" class="tagline">COMING SOON — THE RITUAL BEGINS</p>
   </div>
@@ -243,6 +261,8 @@ button{
     <button id="btnText">Request Access</button>
   </div>
 </section>
+
+<!-- SOCIAL -->
 
 <div class="social-bar">
 <a href="https://www.youtube.com/@SHAKTIBEAUTY"><svg viewBox="0 0 24 24"><path d="M23.498 6.186..."/></svg></a>
@@ -266,16 +286,12 @@ document.addEventListener('mousemove',(e)=>{
 
 // INTRO
 intro.onclick=()=>{
-  if(navigator.vibrate) navigator.vibrate(10);
-
   intro.classList.add('hide');
 
   ambient.volume=0.3;
   ambient.play();
 
-  setTimeout(()=>{
-    whisper.play();
-  },800);
+  setTimeout(()=>{whisper.play();},800);
 
   setTimeout(()=>{
     document.querySelector('.logo').style.animationPlayState='running';
