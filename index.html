@@ -6,14 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHAKTI — Ritual of Radiance</title>
 
-<!-- FAVICONS -->
-
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="favicon-32x32.png">
 <link rel="manifest" href="site.webmanifest">
-
-<!-- FONTS -->
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -24,10 +19,11 @@ body{
   background:#000;
   color:#fff;
   overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
 }
 
-/* ===== LOADER (DIOR STYLE) ===== */
-.loader{
+/* INTRO */
+.touch-intro{
   position:fixed;
   width:100%;
   height:100%;
@@ -36,36 +32,14 @@ body{
   align-items:center;
   justify-content:center;
   z-index:99999;
-  overflow:hidden;
+  font-family:'Playfair Display',serif;
+  letter-spacing:4px;
+  font-size:18px;
+  transition:1s;
 }
-.loader-logo{
+.touch-intro.hide{
   opacity:0;
-  transform:scale(0.8);
-  animation:logoFade 2.5s ease forwards;
-}
-.loader-logo img{
-  width:200px;
-  filter: drop-shadow(0 0 25px rgba(212,175,55,0.5));
-}
-.loader::after{
-  content:'';
-  position:absolute;
-  width:200%;
-  height:100%;
-  background:linear-gradient(120deg, transparent, rgba(212,175,55,0.2), transparent);
-  animation:shimmer 2s infinite;
-}
-@keyframes shimmer{
-  0%{transform:translateX(-100%)}
-  100%{transform:translateX(100%)}
-}
-@keyframes logoFade{
-  to{opacity:1;transform:scale(1)}
-}
-.loader.hide{
-  opacity:0;
-  visibility:hidden;
-  transition:1s ease;
+  pointer-events:none;
 }
 
 /* VIDEO */
@@ -77,142 +51,114 @@ video{
   z-index:-2;
 }
 
-/* OVERLAY + BLUR */
+/* OVERLAY */
 .overlay{
   position:fixed;
   width:100%;
   height:100%;
   background:linear-gradient(to bottom, rgba(0,0,0,0.2), #000);
   z-index:-1;
-  backdrop-filter:blur(0px);
-  transition:0.2s;
 }
 
-/* CURSOR GLOW */
-.cursor{
-  position:fixed;
-  width:140px;height:140px;
-  background:radial-gradient(circle, rgba(212,175,55,0.25), transparent 70%);
-  border-radius:50%;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  z-index:9999;
-  mix-blend-mode:screen;
+/* LOGO HEARTBEAT */
+.logo{
+  width:220px;
+  margin-bottom:20px;
+  animation:pulse 4s ease-in-out infinite;
+  filter:drop-shadow(0 0 15px rgba(212,175,55,0.4));
 }
 
-/* PARTICLES */
-.particles span{
-  position:fixed;
-  width:3px;height:3px;
-  background:rgba(212,175,55,0.4);
-  border-radius:50%;
-  animation:float 15s linear infinite;
-}
-@keyframes float{
-  0%{transform:translateY(100vh) scale(0)}
-  100%{transform:translateY(-10vh) scale(1.2)}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.04)}
 }
 
-/* SECTIONS */
+/* TEXT */
 section{
   height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:20px;
-}
-
-/* LOGO */
-.logo{
-  width:240px;
-  margin-bottom:20px;
-  filter:drop-shadow(0 0 20px rgba(212,175,55,0.4));
-}
-
-/* TEXT REVEAL */
-.reveal span{
-  display:inline-block;
-  opacity:0;
-  transform:translateY(30px);
-  animation:reveal 1s forwards;
-}
-.reveal span:nth-child(1){animation-delay:.1s}
-.reveal span:nth-child(2){animation-delay:.2s}
-.reveal span:nth-child(3){animation-delay:.3s}
-.reveal span:nth-child(4){animation-delay:.4s}
-.reveal span:nth-child(5){animation-delay:.5s}
-.reveal span:nth-child(6){animation-delay:.6s}
-
-@keyframes reveal{
-  to{opacity:1;transform:translateY(0)}
 }
 
 h1{
   font-family:'Playfair Display',serif;
-  font-size:64px;
-  letter-spacing:6px;
+  font-size:48px;
+  letter-spacing:4px;
 }
 
 .tagline{
   opacity:0.8;
-  margin-top:20px;
-  letter-spacing:2px;
+  margin-top:15px;
 }
 
 /* FORM */
-input{
-  width:100%;
-  padding:14px;
-  border-radius:30px;
-  border:none;
-  margin-top:20px;
-}
-button{
-  width:100%;
-  padding:14px;
-  border-radius:30px;
-  border:none;
-  background:#d4af37;
-  color:#000;
-  margin-top:10px;
-  font-weight:bold;
-}
+input{width:100%;padding:14px;border-radius:30px;border:none;margin-top:20px}
+button{width:100%;padding:14px;border-radius:30px;border:none;background:#d4af37;color:#000;margin-top:10px}
 
 /* SOCIAL */
 .social-bar{
   position:fixed;
   top:50%;
-  left:20px;
+  left:15px;
   transform:translateY(-50%);
   display:flex;
   flex-direction:column;
   gap:14px;
 }
+
 .social-bar a{
-  width:42px;height:42px;
-  display:flex;align-items:center;justify-content:center;
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border-radius:50%;
-  background:rgba(255,255,255,0.08);
-  color:#fff;
+  background:rgba(255,255,255,0.05);
   transition:.3s;
 }
-.social-bar a:hover{
-  background:#d4af37;
-  transform:scale(1.1);
+
+.social-bar svg{
+  width:20px;
+  fill:#d4af37;
+}
+
+.social-bar a:active{
+  transform:scale(1.2);
+  box-shadow:0 0 20px rgba(212,175,55,0.6);
 }
 
 /* FLOAT BUTTON */
 .mail-fab{
   position:fixed;
-  bottom:30px;
-  right:30px;
-  padding:14px 22px;
+  bottom:20px;
+  right:20px;
+  padding:12px 18px;
   border-radius:40px;
   background:#d4af37;
   color:#000;
-  font-weight:600;
   text-decoration:none;
+}
+
+/* LIGHT FOLLOW */
+.finger-light{
+  position:fixed;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(212,175,55,0.18), transparent 70%);
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:9998;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  h1{font-size:34px}
+  .logo{width:160px}
 }
 </style>
 
@@ -220,17 +166,11 @@ button{
 
 <body>
 
-<!-- LOADER -->
+<!-- INTRO -->
 
-<div class="loader" id="loader">
-  <div class="loader-logo">
-    <img src="shakti_logo_clean_glow.png">
-  </div>
+<div class="touch-intro" id="intro">
+  Tap to Begin
 </div>
-
-<!-- CURSOR -->
-
-<div class="cursor" id="cursor"></div>
 
 <!-- AUDIO -->
 
@@ -238,45 +178,24 @@ button{
 
 <!-- VIDEO -->
 
-<video autoplay muted loop playsinline>
-  <source src="video.mp4" type="video/mp4">
+<video autoplay muted loop playsinline class="layer">
+  <source src="video.mp4">
 </video>
 
-<!-- OVERLAY -->
+<div class="overlay layer"></div>
 
-<div class="overlay" id="overlay"></div>
-
-<!-- PARTICLES -->
-
-<div class="particles">
-  <span style="left:10%"></span>
-  <span style="left:30%"></span>
-  <span style="left:50%"></span>
-  <span style="left:70%"></span>
-  <span style="left:90%"></span>
-</div>
-
-<!-- HERO -->
+<!-- MAIN -->
 
 <section>
   <div>
     <img src="shakti_logo_clean_glow.png" class="logo">
-
-```
-<h1 class="reveal">
-  <span>S</span><span>H</span><span>A</span><span>K</span><span>T</span><span>I</span>
-</h1>
-
-<p class="tagline">COMING SOON — THE RITUAL BEGINS</p>
-```
-
+    <h1>SHAKTI</h1>
+    <p class="tagline">COMING SOON — THE RITUAL BEGINS</p>
   </div>
 </section>
 
-<!-- EMAIL -->
-
 <section id="join">
-  <div style="max-width:400px;">
+  <div style="max-width:350px;">
     <h1>Join the Ritual</h1>
     <p class="tagline">Be the first to access SHAKTI before the world.</p>
 
@@ -293,53 +212,56 @@ button{
 <!-- SOCIAL -->
 
 <div class="social-bar">
-  <a href="https://www.youtube.com/@SHAKTIBEAUTY">▶</a>
-  <a href="https://x.com/SHAKTI_BEAUTY">X</a>
-  <a href="https://www.instagram.com/shaktibeauty.co">IG</a>
-  <a href="https://www.facebook.com/Shaktibeauty.co">f</a>
+  <a href="https://www.youtube.com/@SHAKTIBEAUTY">
+    <svg viewBox="0 0 24 24"><path d="M23.5 6.2..."/></svg>
+  </a>
+  <a href="https://x.com/SHAKTI_BEAUTY">
+    <svg viewBox="0 0 24 24"><path d="M18.9 2H22..."/></svg>
+  </a>
+  <a href="https://www.instagram.com/shaktibeauty.co">
+    <svg viewBox="0 0 24 24"><path d="M7 2h10..."/></svg>
+  </a>
+  <a href="https://www.facebook.com/Shaktibeauty.co">
+    <svg viewBox="0 0 24 24"><path d="M22 12..."/></svg>
+  </a>
 </div>
-
-<!-- FLOAT BUTTON -->
 
 <a href="#join" class="mail-fab">Join the Ritual</a>
 
 <script>
 
-/* LOADER */
-window.addEventListener('load', () => {
-  setTimeout(()=>{
-    document.getElementById('loader').classList.add('hide');
-  },2500);
-});
+// INTRO
+const intro=document.getElementById('intro');
+intro.addEventListener('touchstart',()=>{
+  intro.classList.add('hide');
 
-/* CURSOR + BLUR */
-const cursor=document.getElementById('cursor');
-const overlay=document.getElementById('overlay');
+  ambient.volume=0.3;
+  ambient.play().catch(()=>{});
 
-document.addEventListener('mousemove',e=>{
-  cursor.style.left=e.clientX+'px';
-  cursor.style.top=e.clientY+'px';
-
-  overlay.style.backdropFilter=`blur(${(e.clientX/window.innerWidth)*6}px)`;
-});
-
-/* SOUND */
-const ambient=document.getElementById('ambient');
-const whisper=document.getElementById('whisper');
-
-document.addEventListener('click',()=>{
-  if(ambient.paused){
-    ambient.volume=0.3;
-    ambient.play();
-  }
   whisper.volume=0.9;
   whisper.play().catch(()=>{});
 });
 
-/* PARALLAX */
+// LIGHT FOLLOW
+const light=document.createElement('div');
+light.className='finger-light';
+document.body.appendChild(light);
+
+document.addEventListener('touchstart',()=>{
+  light.style.opacity=1;
+});
+document.addEventListener('touchmove',e=>{
+  light.style.left=e.touches[0].clientX+'px';
+  light.style.top=e.touches[0].clientY+'px';
+});
+document.addEventListener('touchend',()=>{
+  light.style.opacity=0;
+});
+
+// PARALLAX
 window.addEventListener('scroll',()=>{
-  document.querySelectorAll('section').forEach((el,i)=>{
-    el.style.transform=`translateY(${window.scrollY*(0.05*(i+1))}px)`;
+  document.querySelectorAll('.layer').forEach((el,i)=>{
+    el.style.transform=`translateY(${window.scrollY*(0.02*(i+1))}px)`;
   });
 });
 
