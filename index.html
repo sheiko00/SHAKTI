@@ -4,11 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SHAKTI — Ritual</title>
+
+  <!-- FAVICONS -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+  
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&family=Cairo&display=swap" rel="stylesheet">
 
 <style>
@@ -22,11 +26,11 @@ body{
 }
 body[dir="rtl"]{font-family:Cairo}
 
-/* ===== LAYERS ===== */
+/* ===== LAYERS FIX ===== */
 video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
 .overlay{position:fixed;width:100%;height:100%;background:#0008;z-index:-1}
 
-/* ===== INTRO ===== */
+/* ===== INTRO FIX ===== */
 .intro{
   position:fixed;
   width:100%;height:100%;
@@ -34,11 +38,20 @@ video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
   background:#000;
   z-index:9999;
   cursor:pointer;
+  font-family:'Playfair Display';
+  font-size:22px;
+  letter-spacing:5px;
 }
 .intro.hide{opacity:0;pointer-events:none}
 
-/* ===== LOGO ===== */
-.logo-wrap{margin-bottom:20px;transition:.5s}
+/* ===== LOGO FIX ===== */
+.logo-wrap{
+  position:relative;
+  margin-bottom:20px;
+  transition:.5s;
+  z-index:1000;
+}
+
 .logo-wrap.small{
   position:fixed;
   top:12px;
@@ -50,6 +63,7 @@ video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
 
 .logo{
   width:200px;
+  display:block;
   opacity:0;
   animation:logoReveal 1.8s forwards paused;
 }
@@ -60,7 +74,11 @@ video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-2}
 }
 
 /* ===== TEXT ===== */
-h1{font-family:Playfair;font-size:44px;letter-spacing:5px}
+h1{
+  font-family:Playfair Display;
+  font-size:44px;
+  letter-spacing:5px;
+}
 .tag{opacity:.7;margin-top:10px}
 
 /* ===== SECTIONS ===== */
@@ -70,11 +88,13 @@ section{
   align-items:center;
   justify-content:center;
   text-align:center;
+  position:relative;
+  z-index:1;
 }
 
 /* ===== EMAIL ===== */
 .box{
-  background:#fff1;
+  background:#ffffff10;
   padding:25px;
   border-radius:20px;
   backdrop-filter:blur(8px);
@@ -98,30 +118,34 @@ button{
   margin-top:10px;
 }
 
-/* ===== SOCIAL ===== */
+/* ===== SOCIAL FIX ===== */
 .social{
   position:fixed;
   left:15px;
   top:50%;
   transform:translateY(-50%);
-  z-index:2000;
+  z-index:3000;
 }
 .social a{
   display:block;
   margin:12px 0;
   width:45px;height:45px;
   border-radius:50%;
-  background:#fff1;
+  background:#ffffff15;
   display:flex;align-items:center;justify-content:center;
 }
-.social svg{fill:#d4af37;width:22px}
+.social svg{
+  fill:#d4af37;
+  width:22px;
+  height:22px;
+}
 
 /* ===== CONTROLS ===== */
 .ctrl{
   position:fixed;
   top:15px;
   right:15px;
-  z-index:2000;
+  z-index:3000;
 }
 .ctrl button{
   width:38px;height:38px;
@@ -143,6 +167,7 @@ button{
   border-radius:25px;
   color:#000;
   text-decoration:none;
+  z-index:3000;
 }
 
 /* ===== LIGHT ===== */
@@ -154,7 +179,7 @@ button{
   pointer-events:none;
   transform:translate(-50%,-50%);
   opacity:0;
-  z-index:1500;
+  z-index:2000;
 }
 
 /* ===== REVEAL ===== */
@@ -166,7 +191,7 @@ button{
 
 <body>
 
-<div class="intro" id="intro">Tap to Begin</div>
+<div class="intro" id="intro">TAP TO BEGIN</div>
 
 <div class="ctrl">
 <button id="mute">🔊</button>
@@ -200,7 +225,7 @@ button{
 <!-- SOCIAL -->
 
 <div class="social">
-<a href="#"><svg viewBox="0 0 24 24"><path d="M23.498 6.186L..."/></svg></a>
+<a href="#"><svg viewBox="0 0 24 24"><path d="M23.498 6.186c..."/></svg></a>
 <a href="#"><svg viewBox="0 0 24 24"><path d="M22 12a10..."/></svg></a>
 </div>
 
