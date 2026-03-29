@@ -1,204 +1,359 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHAKTI — Ritual</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        /* CSS STYLES */
-        *{margin:0;padding:0;box-sizing:border-box} 
-        body{ background:#000; color:#fff; font-family:'Inter', sans-serif; overflow-x:hidden; transition: background 0.5s; } 
-        body[dir="rtl"]{font-family:'Cairo', sans-serif} 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SHAKTI — Ritual</title><!-- FAVICON --><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter&family=Cairo&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-        /* VIDEO */
-        video#ambient-video{ position:fixed; width:100%; height:100%; object-fit:cover; z-index:-2; } 
-        .overlay{ position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:-1; } 
+body{
+  background:#000;
+  color:#fff;
+  font-family:Inter;
+  overflow-x:hidden;
+}
+body[dir="rtl"]{font-family:Cairo}
 
-        /* INTRO */
-        .intro{ 
-            position:fixed; top:0; left:0; width:100%; height:100%; 
-            display:flex; align-items:center; justify-content:center; 
-            background:#000; z-index:9999; cursor:pointer; 
-            font-family:'Playfair Display'; font-size:24px; 
-            letter-spacing:6px; transition: opacity 0.8s ease, visibility 0.8s; 
-        } 
-        .intro.hide{opacity:0; visibility: hidden; pointer-events:none} 
+/* VIDEO */
+video{
+  position:fixed;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#0008;
+  z-index:-1;
+}
 
-        /* LOGO */
-        .logo-wrap{ 
-            position:relative; margin-bottom:20px; 
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index:1000; 
-            animation: floatWrap 6s ease-in-out infinite; 
-        } 
-        .logo-wrap.small{ 
-            position:fixed; top:20px; left:50%; 
-            transform: translateX(-50%) scale(0.4); opacity:0.8; 
-        } 
-        .logo{ 
-            width:180px; display:block; margin: 0 auto;
-            animation: logoReveal 1.8s ease forwards, heartbeatGlow 8s infinite; 
-        } 
+/* INTRO */
+.intro{
+  position:fixed;
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  background:#000;
+  z-index:9999;
+  cursor:pointer;
+  font-family:'Playfair Display';
+  font-size:24px;
+  letter-spacing:6px;
+  transition:opacity 0.8s ease;
+}
+.intro.hide{opacity:0;pointer-events:none}
 
-        @keyframes logoReveal{ from{opacity:0;transform:scale(.6)} to{opacity:1;transform:scale(1)} } 
-        @keyframes floatWrap{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} } 
-        @keyframes heartbeatGlow{ 
-            0%,92%,100%{filter:drop-shadow(0 0 0 rgba(212,175,55,0))} 
-            95%{ filter:drop-shadow(0 0 15px rgba(212,175,55,0.6)); } 
-        } 
+/* LOGO */
+.logo-wrap{
+  position:relative;
+  margin-bottom:20px;
+  transition:.5s;
+  z-index:1000;
+  animation: floatWrap 6s ease-in-out infinite;
+}
 
-        /* TEXT & SECTION */
-        section{ height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; flex-direction: column; } 
-        h1{ font-family:'Playfair Display'; font-size:54px; letter-spacing:8px; margin-bottom: 5px; color: #d4af37; } 
-        .tag{opacity:0.6; font-size: 16px; letter-spacing: 3px; text-transform: uppercase;} 
+.logo-wrap.small{
+  position:fixed;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%) scale(.5);
+  opacity:.75;
+  animation:none !important;
+}
 
-        /* FORM BOX */
-        .box{ 
-            background:rgba(255,255,255,0.05); padding:30px; 
-            border-radius:24px; backdrop-filter:blur(15px); 
-            border: 1px solid rgba(212,175,55,0.15);
-            max-width: 380px; width: 90%; margin-top: 40px;
-        } 
-        input{ 
-            width:100%; padding:14px 20px; border-radius:30px; 
-            border:1px solid rgba(255,255,255,0.1); margin-top:20px; 
-            background: rgba(0,0,0,0.4); color: #fff; text-align: center; outline: none;
-        } 
-        #btn{ 
-            width:100%; padding:14px; border-radius:30px; 
-            border:none; background:#d4af37; color:#000; 
-            margin-top:15px; cursor: pointer; font-weight: 700;
-            transition: 0.3s; text-transform: uppercase;
-        } 
-        #btn:hover{ background: #fff; transform: translateY(-2px); }
+.logo{
+  width:200px;
+  display:block;
+  animation:
+    logoReveal 1.8s ease forwards,
+    heartbeatGlow 8s infinite;
+}
 
-        /* CONTROLS */
-        .ctrl{ position:fixed; top:25px; right:25px; z-index:3000; display: flex; gap: 10px; } 
-        .ctrl button{ 
-            width:40px; height:40px; border-radius:50%; 
-            background:rgba(212,175,55,0.9); color:#000; border:none; 
-            cursor:pointer; font-weight: bold; display: flex; align-items:center; justify-content:center;
-        } 
+/* ANIMATIONS */
+@keyframes logoReveal{
+  from{opacity:0;transform:scale(.6)}
+  to{opacity:1;transform:scale(1)}
+}
 
-        /* MOUSE LIGHT */
-        .light{ 
-            position:fixed; width:300px; height:300px; 
-            border-radius:50%; background:radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%); 
-            pointer-events:none; transform:translate(-50%,-50%); 
-            opacity:0; z-index:2000; transition: opacity 0.5s;
-        } 
+@keyframes floatWrap{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
 
-        /* REVEAL */
-        .reveal{opacity:0; transform:translateY(20px); transition: 1.5s cubic-bezier(0.2, 1, 0.3, 1);} 
-        .reveal.show{opacity:1; transform:translateY(0)} 
-    </style>
-</head>
-<body>
+@keyframes heartbeatGlow{
+  0%,92%,100%{filter:drop-shadow(0 0 0 rgba(212,175,55,0))}
+  95%{
+    filter:drop-shadow(0 0 12px rgba(212,175,55,0.6))
+           drop-shadow(0 0 25px rgba(212,175,55,0.3));
+  }
+}
 
-    <div class="intro" id="intro">TAP TO BEGIN</div>
+/* HOVER */
+.logo:hover{
+  filter:drop-shadow(0 0 20px rgba(212,175,55,0.8));
+}
 
-    <video id="ambient-video" autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-golden-liquid-waves-background-34502-large.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
+/* TEXT */
+h1{
+  font-family:'Playfair Display';
+  font-size:44px;
+  letter-spacing:5px;
+}
+.tag{opacity:.7;margin-top:10px}
 
-    <div class="ctrl">
-        <button id="langBtn">AR</button>
-        <button id="muteBtn">🔊</button>
-    </div>
+/* SECTION */
+section{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-    <section>
-        <div class="logo-wrap" id="logoWrap">
-            <img src="https://cdn-icons-png.flaticon.com/512/3665/3665917.png" alt="SHAKTI" class="logo">
-        </div>
-        
-        <div class="reveal">
-            <h1 id="title">SHAKTI</h1>
-            <p class="tag" id="tagText">COMING SOON — THE RITUAL BEGINS</p>
-        </div>
+/* EMAIL */
+.box{
+  background:#ffffff10;
+  padding:25px;
+  border-radius:20px;
+  backdrop-filter:blur(8px);
+}
 
-        <div class="box reveal">
-            <h3 id="joinTitle">Join the Ritual</h3>
-            <input type="email" id="mailInput" placeholder="Enter your email">
-            <button id="btn">Request Access</button>
-        </div>
-    </section>
+input{
+  width:100%;
+  padding:12px;
+  border-radius:20px;
+  border:none;
+  margin-top:15px;
+}
 
-    <script>
-        // تحديد العناصر بعد تحميل الصفحة لضمان وجودها
-        const intro = document.getElementById('intro');
-        const logoWrap = document.getElementById('logoWrap');
-        const muteBtn = document.getElementById('muteBtn');
-        const langBtn = document.getElementById('langBtn');
-        const tagText = document.getElementById('tagText');
-        const joinTitle = document.getElementById('joinTitle');
-        const btn = document.getElementById('btn');
-        const mailInput = document.getElementById('mailInput');
-        const video = document.getElementById('ambient-video');
+button{
+  width:100%;
+  padding:12px;
+  border-radius:20px;
+  border:none;
+  background:#d4af37;
+  color:#000;
+  margin-top:10px;
+}
 
-        // تأثير الإضاءة مع الماوس
-        const light = document.createElement('div');
-        light.className = 'light';
-        document.body.appendChild(light);
+/* SOCIAL */
+.social{
+  position:fixed;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:3000;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
 
-        document.addEventListener('mousemove', e => {
-            light.style.opacity = 1;
-            light.style.left = e.clientX + 'px';
-            light.style.top = e.clientY + 'px';
-        });
+.social a{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(6px);
+  transition:0.3s ease;
+}
 
-        // تشغيل الموقع عند الضغط على Intro
-        intro.addEventListener('click', () => {
-            intro.classList.add('hide');
-            // محاولة تشغيل الفيديو بصوت إذا أردت (المتصفحات تمنع الصوت التلقائي)
-            video.muted = false; 
-        });
+.social a:hover{
+  background:rgba(212,175,55,0.2);
+  transform:scale(1.1);
+}
 
-        // تغيير حجم اللوجو عند السكرول
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                logoWrap.classList.add('small');
-            } else {
-                logoWrap.classList.remove('small');
-            }
-        });
+.social svg{
+  width:22px;
+  height:22px;
+  fill:#d4af37;
+}
 
-        // تأثير الظهور التدريجي (Intersection Observer)
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('show');
-            });
-        }, { threshold: 0.1 });
+/* CONTROLS */
+.ctrl{
+  position:fixed;
+  top:15px;
+  right:15px;
+  z-index:3000;
+}
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+.ctrl button{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:#d4af37;
+  color:#000;
+  border:none;
+  margin-left:5px;
+  cursor:pointer;
+  box-shadow:0 0 10px rgba(212,175,55,0.3);
+}
 
-        // كتم الصوت
-        muteBtn.addEventListener('click', () => {
-            video.muted = !video.muted;
-            muteBtn.innerText = video.muted ? '🔇' : '🔊';
-        });
+/* EMAIL */
+.mail{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#d4af37;
+  padding:10px 16px;
+  border-radius:25px;
+  color:#000;
+  text-decoration:none;
+  z-index:3000;
+}
 
-        // تبديل اللغة
-        let currentLang = 'en';
-        langBtn.addEventListener('click', () => {
-            currentLang = (currentLang === 'en') ? 'ar' : 'en';
-            
-            if(currentLang === 'ar') {
-                tagText.innerText = 'قريباً — الطقس يبدأ';
-                joinTitle.innerText = 'انضم إلى الطقوس';
-                btn.innerText = 'اطلب الوصول';
-                mailInput.placeholder = 'أدخل بريدك الإلكتروني';
-                document.body.dir = 'rtl';
-                langBtn.innerText = 'EN';
-            } else {
-                tagText.innerText = 'COMING SOON — THE RITUAL BEGINS';
-                joinTitle.innerText = 'Join the Ritual';
-                btn.innerText = 'Request Access';
-                mailInput.placeholder = 'Enter your email';
-                document.body.dir = 'ltr';
-                langBtn.innerText = 'AR';
-            }
-        });
-    </script>
-</body>
+/* LIGHT */
+.light{
+  position:fixed;
+  width:180px;height:180px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,55,.2),transparent);
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  opacity:0;
+  z-index:2000;
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:1s}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media (max-width:768px){
+  .logo-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .logo{width:140px}
+  h1{font-size:36px}
+}
+</style></head><body><div class="intro" id="intro">TAP TO BEGIN</div><div class="ctrl">
+<button id="mute">🔊</button>
+<button id="lang">EN</button>
+</div><audio id="ambient" src="ambient.mp3" loop></audio>
+<audio id="whisper" src="whisper.mp3"></audio>
+
+<video autoplay muted loop playsinline>
+<source src="video.mp4">
+</video><div class="overlay"></div><section>
+<div class="reveal">
+<div class="logo-wrap" id="logoWrap">
+<img src="shakti_logo_clean_glow.png" class="logo">
+</div>
+<h1>SHAKTI</h1>
+<p class="tag" id="tag">COMING SOON — THE RITUAL BEGINS</p>
+</div>
+</section><section>
+<div class="box reveal">
+<h2 id="join">Join the Ritual</h2>
+<input id="mailInput" placeholder="Enter your email">
+<button id="btn">Request Access</button>
+</div>
+</section><div class="social">
+<a href="https://www.youtube.com/@SHAKTIBEAUTY" target="_blank">
+<svg viewBox="0 0 24 24"><path d="M23.498 6.186a2.997 2.997 0 0 0-2.109-2.122C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.389.564A2.997 2.997 0 0 0 .502 6.186A31.29 31.29 0 0 0 0 12a31.29 31.29 0 0 0 .502 5.814 2.997 2.997 0 0 0 2.109 2.122C4.495 20.5 12 20.5 12 20.5s7.505 0 9.389-.564a2.997 2.997 0 0 0 2.109-2.122A31.29 31.29 0 0 0 24 12a31.29 31.29 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+</a><a href="https://x.com/SHAKTI_BEAUTY" target="_blank">
+<svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.2 9.46 12.647h-7.406l-5.805-7.67-6.713 7.67H.398l8.6-9.834L0 1.153h7.594l5.243 6.932 6.064-6.932z"/></svg>
+</a><a href="https://www.instagram.com/shaktibeauty.co" target="_blank">
+<svg viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 
+5-5V7c0-2.757-2.243-5-5-5H7zm5 5a5 5 0 110 10 5 5 0 010-10zm6.5-.5a1.5 
+1.5 0 110 3 1.5 1.5 0 010-3z"/></svg>
+</a><a href="https://www.facebook.com/Shaktibeauty.co" target="_blank">
+<svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.87v-6.99H8.1V12h2.4V9.8c0-2.38 1.42-3.7 
+3.6-3.7 1.04 0 2.12.18 2.12.18v2.33h-1.2c-1.18 0-1.55.73-1.55 
+1.48V12h2.64l-.42 2.88h-2.22v6.99A10 10 0 0022 12z"/></svg>
+</a>
+</div><a href="mailto:hello@shakti.beauty" class="mail">Email</a>
+
+<script>
+
+// LIGHT (optimized)
+const light=document.createElement('div')
+light.className='light'
+document.body.appendChild(light)
+
+let ticking=false;
+function updateLight(x,y){
+  light.style.opacity=1;
+  light.style.left=x+'px';
+  light.style.top=y+'px';
+  ticking=false;
+}
+
+document.addEventListener('mousemove',e=>{
+  if(!ticking){
+    requestAnimationFrame(()=>updateLight(e.clientX,e.clientY));
+    ticking=true;
+  }
+});
+
+document.addEventListener('touchmove',e=>{
+  if(!ticking){
+    requestAnimationFrame(()=>updateLight(e.touches[0].clientX,e.touches[0].clientY));
+    ticking=true;
+  }
+});
+
+// INTRO
+intro.onclick=()=>{
+  intro.classList.add('hide')
+  setTimeout(()=>intro.style.display="none",800)
+
+  ambient.volume=.3
+  ambient.play().catch(()=>{})
+
+  setTimeout(()=>whisper.play().catch(()=>{}),700)
+}
+
+// HEARTBEAT
+let m=false
+function heartbeat(){
+  if(!m){
+    whisper.currentTime=0
+    whisper.volume=0.2
+    whisper.play().catch(()=>{})
+  }
+}
+setTimeout(heartbeat,4000)
+setInterval(heartbeat,8000)
+
+// FLOAT LOGO
+window.onscroll=()=>{
+  if(scrollY>100) logoWrap.classList.add('small')
+  else logoWrap.classList.remove('small')
+}
+
+// REVEAL
+const obs=new IntersectionObserver(e=>{
+  e.forEach(el=>{
+    if(el.isIntersecting) el.target.classList.add('show')
+  })
+})
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))
+
+// MUTE
+mute.onclick=()=>{
+  m=!m
+  ambient.muted=m
+  whisper.muted=m
+  mute.innerText=m?'🔇':'🔊'
+}
+
+// LANG
+let l='en'
+lang.onclick=()=>{
+  l=l==='en'?'ar':'en'
+  tag.innerText=l==='en'?'COMING SOON — THE RITUAL BEGINS':'قريباً — الطقس يبدأ'
+  join.innerText=l==='en'?'Join the Ritual':'انضم الآن'
+  btn.innerText=l==='en'?'Request Access':'اطلب الوصول'
+  mailInput.placeholder=l==='en'?'Enter your email':'أدخل بريدك'
+  document.body.dir=l==='ar'?'rtl':'ltr'
+}
+
+</script></body>
 </html>
